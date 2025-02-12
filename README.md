@@ -1,2 +1,2 @@
-### ChefMate Recipe App
+# ChefMate Recipe App
 By: Ariel and Leonardo
