@@ -9,10 +9,10 @@
 /* Begin PBXBuildFile section */
 		5DD8DFFE2D6665F900C05C35 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD8DFFD2D6665F900C05C35 /* SplashScreen.swift */; };
 		5DD8E0002D666B0400C05C35 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD8DFFF2D666B0400C05C35 /* HomeScreen.swift */; };
-		5DD8E0022D666F4500C05C35 /* GoogleService-Info-2.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5DD8E0012D666F4500C05C35 /* GoogleService-Info-2.plist */; };
 		5DD8E0052D66701600C05C35 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 5DD8E0042D66701600C05C35 /* FirebaseAuth */; };
 		5DD8E0072D66701600C05C35 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 5DD8E0062D66701600C05C35 /* FirebaseFirestore */; };
 		5DD8E0092D66701600C05C35 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 5DD8E0082D66701600C05C35 /* FirebaseStorage */; };
+		5DD8E00B2D66728500C05C35 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5DD8E00A2D66728500C05C35 /* GoogleService-Info.plist */; };
 		B0007F9F2D5D35A6003C682A /* ChefMate_Recipe_AppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0007F9E2D5D35A6003C682A /* ChefMate_Recipe_AppApp.swift */; };
 		B0007FA12D5D35A6003C682A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0007FA02D5D35A6003C682A /* ContentView.swift */; };
 		B0007FA32D5D35A8003C682A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B0007FA22D5D35A8003C682A /* Assets.xcassets */; };
@@ -22,7 +22,7 @@
 /* Begin PBXFileReference section */
 		5DD8DFFD2D6665F900C05C35 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
 		5DD8DFFF2D666B0400C05C35 /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
-		5DD8E0012D666F4500C05C35 /* GoogleService-Info-2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-2.plist"; sourceTree = "<group>"; };
+		5DD8E00A2D66728500C05C35 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B0007F9B2D5D35A6003C682A /* ChefMate Recipe App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ChefMate Recipe App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0007F9E2D5D35A6003C682A /* ChefMate_Recipe_AppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChefMate_Recipe_AppApp.swift; sourceTree = "<group>"; };
 		B0007FA02D5D35A6003C682A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -79,7 +79,7 @@
 		B0007F9D2D5D35A6003C682A /* ChefMate Recipe App */ = {
 			isa = PBXGroup;
 			children = (
-				5DD8E0012D666F4500C05C35 /* GoogleService-Info-2.plist */,
+				5DD8E00A2D66728500C05C35 /* GoogleService-Info.plist */,
 				5DD8DFFC2D66659100C05C35 /* Models */,
 				5DD8DFFB2D66658B00C05C35 /* Views */,
 				B0007F9E2D5D35A6003C682A /* ChefMate_Recipe_AppApp.swift */,
@@ -166,7 +166,7 @@
 			files = (
 				B0007FA62D5D35A8003C682A /* Preview Assets.xcassets in Resources */,
 				B0007FA32D5D35A8003C682A /* Assets.xcassets in Resources */,
-				5DD8E0022D666F4500C05C35 /* GoogleService-Info-2.plist in Resources */,
+				5DD8E00B2D66728500C05C35 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
