@@ -39,13 +39,17 @@ class AuthManager : ObservableObject {
         self.isAuthenticated = (self.user != nil)
     }
     
-    func login(user: UserModel) {
+    func login(user: UserModel, completion: @escaping (Bool) -> Void) {
         Auth.auth().signIn(withEmail: user.email, password: user.password) {result, error in
-            if let error = error{
-                self.errorMessage = error.localizedDescription
-            } else {
-                self.user = result?.user
-                self.isAuthenticated = true
+            DispatchQueue.main.async {
+                if let error = error{
+                    self.errorMessage = error.localizedDescription
+                    completion(false)
+                } else {
+                    self.user = result?.user
+                    self.isAuthenticated = true
+                    completion(true)
+                }
             }
         }
     }

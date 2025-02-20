@@ -14,43 +14,48 @@ struct LoginScreen: View {
     //@State private var isValidated = false
     @State private var showAlert = false
     @State private var errorMsg = ""
+    @AppStorage("isLoggedIn") private var isLoggedIn = false
     var body: some View {
-        VStack {
-            Image("logo")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 200)
-            
-            Text("Log in")
-                .font(.largeTitle)
-                .foregroundStyle(.orange)
-                .autocapitalization(.none)
-            
-            TextField("Email", text: $email)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding(.horizontal)
-            
-            SecureField("Password", text: $password)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding()
-            
-            Button(){
-                //validate
-                submitLogin()
-                //submit method
-            } label: {
-                Text("Submit")
-                    .frame(width: 100, height: 50)
-                    .background(.orange)
-                    .clipShape(Capsule())
-                    .foregroundStyle(.white)
+        NavigationView {
+            VStack {
+                Image("logo")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 200)
+                
+                Text("Log in")
+                    .font(.largeTitle)
+                    .foregroundStyle(.orange)
+                    .autocapitalization(.none)
+                
+                TextField("Email", text: $email)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding(.horizontal)
+                
+                SecureField("Password", text: $password)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding()
+                
+                Button(){
+                    //validate
+                    submitLogin()
+                    //submit method
+                } label: {
+                    Text("Submit")
+                        .frame(width: 100, height: 50)
+                        .background(.orange)
+                        .clipShape(Capsule())
+                        .foregroundStyle(.white)
                     
-            }.padding()
-            
-
-            
-        }.alert(isPresented: $showAlert) {
-            Alert(title: Text("Error"), message: Text(errorMsg), dismissButton: .default(Text("ok")))
+                }.padding()
+                
+                NavigationLink(destination: HomeScreen(), isActive: $isLoggedIn) {
+                    EmptyView()
+                }
+                
+            }.alert(isPresented: $showAlert) {
+                Alert(title: Text("Error"), message: Text(errorMsg), dismissButton: .default(Text("ok")))
+            }
         }
     }
     
@@ -66,17 +71,15 @@ struct LoginScreen: View {
         
         let user = UserModel(email: email, password: password)
         
-        authManager.login(user: user)
-        
-        if authManager.user != nil {
-            //go to homescreen
-        } else {
-            //error
-            showAlert = true
-            errorMsg = authManager.errorMessage ?? ""
+        authManager.login(user: user) { success in
+            if success {
+                isLoggedIn = true
+            }
+            else {
+                showAlert = true
+                errorMsg = authManager.errorMessage ?? "Login failed"
+            }
         }
-        
-        //go to homescreen
         
     }
 }
