@@ -9,9 +9,10 @@ import SwiftUI
 
 struct SplashScreen: View {
     @State private var isActive = false
+    @StateObject var authManager = AuthManager()
     var body: some View {
         if isActive {
-            HomeScreen()
+            LoginScreen()
         }
         else {
             ZStack {
