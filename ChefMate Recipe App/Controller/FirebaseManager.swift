@@ -9,19 +9,43 @@ import Foundation
 import FirebaseCore
 import FirebaseAuth
 
-class FirebaseManager {
-    static let shared = FirebaseManager()
+/*
+ class FirebaseManager {
+ static let shared = FirebaseManager()
+ 
+ private init() {}
+ 
+ // Login with Authentication
+ func login(user: UserModel, completion: @escaping (Result<User, Error>) -> Void) {
+ Auth.auth().signIn(withEmail: user.email, password: user.password) { authResult, error in
+ if let error = error {
+ completion(.failure(error))
+ }
+ else if let user = authResult?.user {
+ completion(.success(user))
+ }
+ }
+ }
+ }
+ */
+
+class AuthManager : ObservableObject {
+    @Published var user: User?
+    @Published var errorMessage: String?
+    @Published var isAuthenticated = false
     
-    private init() {}
+    init(){
+        self.user = Auth.auth().currentUser
+        self.isAuthenticated = (self.user != nil)
+    }
     
-    // Login with Authentication
-    func login(user: UserModel, completion: @escaping (Result<User, Error>) -> Void) {
-        Auth.auth().signIn(withEmail: user.email, password: user.password) { authResult, error in
-            if let error = error {
-                completion(.failure(error))
-            }
-            else if let user = authResult?.user {
-                completion(.success(user))
+    func login(user: UserModel) {
+        Auth.auth().signIn(withEmail: user.email, password: user.password) {result, error in
+            if let error = error{
+                self.errorMessage = error.localizedDescription
+            } else {
+                self.user = result?.user
+                self.isAuthenticated = true
             }
         }
     }
