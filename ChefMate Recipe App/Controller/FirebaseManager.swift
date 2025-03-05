@@ -53,4 +53,36 @@ class AuthManager : ObservableObject {
             }
         }
     }
+    
+    func register(user: UserModel, completion: @escaping (Bool) -> Void) {
+        Auth.auth().createUser(withEmail: user.email, password: user.password) { result, error in
+            DispatchQueue.main.async {
+                if let error = error {
+                    self.errorMessage = error.localizedDescription
+                    completion(false)
+                } else {
+                    self.user = result?.user
+                    self.isAuthenticated = true
+                    completion(true)
+                }
+            }
+        }
+    }
+    
+    func logout(completion: @escaping (Bool) -> Void) {
+        do {
+            try Auth.auth().signOut()
+            DispatchQueue.main.async {
+                self.user = nil
+                self.isAuthenticated = false 
+                completion(true)
+            }
+        } catch let error {
+            DispatchQueue.main.async {
+                self.errorMessage = error.localizedDescription
+                completion(false)
+            }
+        }
+    }
+
 }
