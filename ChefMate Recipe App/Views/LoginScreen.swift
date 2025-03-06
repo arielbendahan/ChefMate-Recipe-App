@@ -11,7 +11,6 @@ struct LoginScreen: View {
     @StateObject private var authManager = AuthManager()
     @State private var email = ""
     @State private var password = ""
-    //@State private var isValidated = false
     @State private var showAlert = false
     @State private var errorMsg = ""
     @AppStorage("isLoggedIn") private var isLoggedIn = false
@@ -64,10 +63,7 @@ struct LoginScreen: View {
                         
                     }.padding()
                     VStack(alignment: .leading, spacing: 5) {
-
-                        Button() {
-                            // navigation link to register page
-                        } label: {
+                        NavigationLink(destination: RegisterScreen()) {
                             Text("Register")
                                 .font(.headline)
                                 .foregroundColor(.white)

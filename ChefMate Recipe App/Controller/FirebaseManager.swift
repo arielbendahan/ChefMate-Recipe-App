@@ -43,12 +43,22 @@ class AuthManager : ObservableObject {
     func register(user: UserModel, completion: @escaping (Bool) -> Void) {
         Auth.auth().createUser(withEmail: user.email, password: user.password) { result, error in
             DispatchQueue.main.async {
-                if let error = error {
-                    self.errorMessage = error.localizedDescription
+                if let error = error as NSError?{
+                    switch error.code {
+                    case AuthErrorCode.invalidEmail.rawValue:
+                        self.errorMessage = "Email not in correct format."
+                    case AuthErrorCode.emailAlreadyInUse.rawValue:
+                        self.errorMessage = "Email already in use. Please enter another email"
+                    case AuthErrorCode.weakPassword.rawValue:
+                        self.errorMessage = "Password must be 6 characters or more."
+                    default:
+                        self.errorMessage = error.localizedDescription
+                    }
                     completion(false)
                 } else {
                     self.user = result?.user
                     self.isAuthenticated = true
+                    print("Register successful")
                     completion(true)
                 }
             }
