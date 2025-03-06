@@ -20,6 +20,7 @@
 		B0007FA32D5D35A8003C682A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B0007FA22D5D35A8003C682A /* Assets.xcassets */; };
 		B0007FA62D5D35A8003C682A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B0007FA52D5D35A8003C682A /* Preview Assets.xcassets */; };
 		B0A585A32D79F039009EEAC1 /* RegisterScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A585A22D79F039009EEAC1 /* RegisterScreen.swift */; };
+		B0A585A52D79FD35009EEAC1 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A585A42D79FD35009EEAC1 /* HomeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		B0007FA22D5D35A8003C682A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B0007FA52D5D35A8003C682A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B0A585A22D79F039009EEAC1 /* RegisterScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterScreen.swift; sourceTree = "<group>"; };
+		B0A585A42D79FD35009EEAC1 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,7 @@
 				5DD8DFFF2D666B0400C05C35 /* HomeScreen.swift */,
 				5DD8E00C2D66749C00C05C35 /* LoginScreen.swift */,
 				B0A585A22D79F039009EEAC1 /* RegisterScreen.swift */,
+				B0A585A42D79FD35009EEAC1 /* HomeView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -194,6 +197,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0A585A52D79FD35009EEAC1 /* HomeView.swift in Sources */,
 				5DD8E0002D666B0400C05C35 /* HomeScreen.swift in Sources */,
 				5DD8DFFE2D6665F900C05C35 /* SplashScreen.swift in Sources */,
 				5DD8E0122D6675B800C05C35 /* FirebaseManager.swift in Sources */,

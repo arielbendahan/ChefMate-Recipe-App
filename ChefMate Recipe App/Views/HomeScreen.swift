@@ -9,9 +9,24 @@ import SwiftUI
 
 struct HomeScreen: View {
     var body: some View {
-        VStack {
-            
-        }
+        TabView() {
+            HomeView()
+                .tabItem {
+                    Image(systemName: "house")
+                }
+            HomeView()
+                .tabItem {
+                    Image(systemName: "magnifyingglass.circle")
+                }
+            HomeView()
+                .tabItem {
+                    Image(systemName: "book.fill")
+                }
+            HomeView()
+                .tabItem {
+                    Image(systemName: "person.circle.fill")
+                }
+        }.accentColor(.orange)
     }
 }
 
