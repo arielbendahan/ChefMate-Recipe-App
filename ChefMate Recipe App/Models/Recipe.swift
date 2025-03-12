@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Reciper: Identifiable, Codable {
+struct Recipe: Identifiable, Codable {
     let id: Int
     let title: String
     let image: String?
