@@ -9,7 +9,7 @@ import Foundation
 
 class ApiManager {
     static let shared = ApiManager()
-    private let apiKey = "replace_with_api_key"
+    private let apiKey = "7042b5e9c0ae40258bbb050bf01a6000"
     private let baseURL = "https://api.spoonacular.com/"
 
     private init() {}

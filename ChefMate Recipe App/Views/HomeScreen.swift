@@ -27,6 +27,7 @@ struct HomeScreen: View {
                     Image(systemName: "person.circle.fill")
                 }
         }.accentColor(.orange)
+            .navigationBarBackButtonHidden(true)
     }
 }
 
