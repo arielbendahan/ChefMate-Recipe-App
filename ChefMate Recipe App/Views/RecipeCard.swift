@@ -14,7 +14,7 @@ struct RecipeCard: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             ZStack {
-                Color.white // Ensures full background coverage
+                Color.white
                 
                 AsyncImage(url: URL(string: recipe.image)) { phase in
                     switch phase {
@@ -35,17 +35,17 @@ struct RecipeCard: View {
                     }
                 }
             }
-            .frame(height: 160) // Ensures image always has space
+            .frame(height: 160)
             
             VStack(alignment: .leading, spacing: 8) {
                 Text(recipe.title)
                     .font(.headline)
                     .foregroundColor(.black)
-                    .frame(height: 70) // Allows space for varying title lengths
+                    .frame(height: 70)
                     .multilineTextAlignment(.leading)
             }
             .padding()
-            .frame(height: 70) // Adds more space to prevent pushing content upwards
+            .frame(height: 70)
         }
         .background(Color.white)
         .cornerRadius(15)
