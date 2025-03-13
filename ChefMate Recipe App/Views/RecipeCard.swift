@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 struct RecipeCard: View {
     let recipe: Recipe
     
@@ -41,11 +40,23 @@ struct RecipeCard: View {
                 Text(recipe.title)
                     .font(.headline)
                     .foregroundColor(.black)
-                    .frame(height: 70)
+                    .frame(height: 50)
                     .multilineTextAlignment(.leading)
+                
+                HStack {
+                    Label("\(recipe.readyInMinutes) min", systemImage: "clock")
+                        .font(.subheadline)
+                        .foregroundColor(.gray)
+                    
+                    Spacer()
+                    
+                    Label("\(Int(recipe.spoonacularScore.rounded()))", systemImage: "star.fill")
+                        .font(.subheadline)
+                        .foregroundColor(.yellow)
+                }
             }
             .padding()
-            .frame(height: 70)
+            .frame(height: 80)
         }
         .background(Color.white)
         .cornerRadius(15)
@@ -54,15 +65,14 @@ struct RecipeCard: View {
     }
 }
 
-
-
 struct RecipeCard_Previews: PreviewProvider {
     static var previews: some View {
         RecipeCard(recipe: Recipe(
             id: 12345,
             title: "Spaghetti Carbonara",
-            image: "https://img.spoonacular.com/recipes/12345-312x231.jpg"
+            image: "https://img.spoonacular.com/recipes/12345-312x231.jpg",
+            readyInMinutes: 20,
+            spoonacularScore: 84.3
         ))
     }
 }
-

@@ -24,6 +24,7 @@
 		B063E2762D8206000017759E /* RecipeScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B063E2752D8206000017759E /* RecipeScrollView.swift */; };
 		B063E2782D820A4A0017759E /* RecipeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B063E2772D820A4A0017759E /* RecipeCard.swift */; };
 		B063E27A2D83078F0017759E /* ExploreScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B063E2792D83078F0017759E /* ExploreScreen.swift */; };
+		B063E27C2D8313840017759E /* RecipeInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B063E27B2D8313840017759E /* RecipeInfoView.swift */; };
 		B0A585A32D79F039009EEAC1 /* RegisterScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A585A22D79F039009EEAC1 /* RegisterScreen.swift */; };
 		B0A585A52D79FD35009EEAC1 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A585A42D79FD35009EEAC1 /* HomeView.swift */; };
 /* End PBXBuildFile section */
@@ -45,6 +46,7 @@
 		B063E2752D8206000017759E /* RecipeScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeScrollView.swift; sourceTree = "<group>"; };
 		B063E2772D820A4A0017759E /* RecipeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCard.swift; sourceTree = "<group>"; };
 		B063E2792D83078F0017759E /* ExploreScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreScreen.swift; sourceTree = "<group>"; };
+		B063E27B2D8313840017759E /* RecipeInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeInfoView.swift; sourceTree = "<group>"; };
 		B0A585A22D79F039009EEAC1 /* RegisterScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterScreen.swift; sourceTree = "<group>"; };
 		B0A585A42D79FD35009EEAC1 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -73,6 +75,7 @@
 				B063E2752D8206000017759E /* RecipeScrollView.swift */,
 				B063E2772D820A4A0017759E /* RecipeCard.swift */,
 				B063E2792D83078F0017759E /* ExploreScreen.swift */,
+				B063E27B2D8313840017759E /* RecipeInfoView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -212,6 +215,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B063E27C2D8313840017759E /* RecipeInfoView.swift in Sources */,
 				B063E2782D820A4A0017759E /* RecipeCard.swift in Sources */,
 				B063E27A2D83078F0017759E /* ExploreScreen.swift in Sources */,
 				B0A585A52D79FD35009EEAC1 /* HomeView.swift in Sources */,

@@ -37,6 +37,29 @@ struct HomeView: View {
                 Spacer()
             }
             RecipeScrollView()
+            Divider()
+                .frame(width: 300)
+                .padding()
+            HStack {
+                Text("Trending Recipes")
+                    .font(.title2)
+                    .bold()
+                    .padding(.leading)
+                Spacer()
+            }
+            RecipeScrollView()
+            Divider()
+                .frame(width: 300)
+                .padding()
+            HStack {
+                Text("Favourited Recipes")
+                    .font(.title2)
+                    .bold()
+                    .padding(.leading)
+                Spacer()
+            }
+            RecipeScrollView()
+            
             Spacer()
 
         }
