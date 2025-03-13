@@ -79,6 +79,24 @@ class ApiManager {
         let decodedResponse = try JSONDecoder().decode(RecipeResponse.self, from: data)
         return decodedResponse.results
     }
+    
+    func searchRecipesByCuisine(cuisine: String) async throws -> [Recipe] {
+        let endpoint = "/recipes/complexSearch"
+        let urlString = "\(baseURL)\(endpoint)?cuisine=\(cuisine)&number=10&apiKey=\(apiKey)"
+ 
+        guard let url = URL(string: urlString) else {
+            throw APIError.invalidURL
+        }
+ 
+        let (data, response) = try await URLSession.shared.data(from: url)
+ 
+        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+            throw APIError.invalidResponse
+        }
+ 
+        let decodedResponse = try JSONDecoder().decode(RecipeResponse.self, from: data)
+        return decodedResponse.results
+    }
 }
  
 struct RecipeResponse: Codable {
