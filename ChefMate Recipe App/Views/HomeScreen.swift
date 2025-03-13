@@ -14,7 +14,7 @@ struct HomeScreen: View {
                 .tabItem {
                     Image(systemName: "house")
                 }
-            HomeView()
+            ExploreScreen()
                 .tabItem {
                     Image(systemName: "magnifyingglass.circle")
                 }

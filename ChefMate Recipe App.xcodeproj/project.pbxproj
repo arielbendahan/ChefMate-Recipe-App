@@ -25,6 +25,7 @@
 		B063E2782D820A4A0017759E /* RecipeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B063E2772D820A4A0017759E /* RecipeCard.swift */; };
 		B063E27A2D83078F0017759E /* ExploreScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B063E2792D83078F0017759E /* ExploreScreen.swift */; };
 		B063E27C2D8313840017759E /* RecipeInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B063E27B2D8313840017759E /* RecipeInfoView.swift */; };
+		B063E27E2D832F740017759E /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B063E27D2D832F740017759E /* Filter.swift */; };
 		B0A585A32D79F039009EEAC1 /* RegisterScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A585A22D79F039009EEAC1 /* RegisterScreen.swift */; };
 		B0A585A52D79FD35009EEAC1 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A585A42D79FD35009EEAC1 /* HomeView.swift */; };
 /* End PBXBuildFile section */
@@ -47,6 +48,7 @@
 		B063E2772D820A4A0017759E /* RecipeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCard.swift; sourceTree = "<group>"; };
 		B063E2792D83078F0017759E /* ExploreScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreScreen.swift; sourceTree = "<group>"; };
 		B063E27B2D8313840017759E /* RecipeInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeInfoView.swift; sourceTree = "<group>"; };
+		B063E27D2D832F740017759E /* Filter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		B0A585A22D79F039009EEAC1 /* RegisterScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterScreen.swift; sourceTree = "<group>"; };
 		B0A585A42D79FD35009EEAC1 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -83,6 +85,7 @@
 		5DD8DFFC2D66659100C05C35 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				B063E27D2D832F740017759E /* Filter.swift */,
 				B063E2732D81F53F0017759E /* Recipe.swift */,
 				5DD8E00E2D6674AF00C05C35 /* User.swift */,
 			);
@@ -228,6 +231,7 @@
 				B0A585A32D79F039009EEAC1 /* RegisterScreen.swift in Sources */,
 				B0007FA12D5D35A6003C682A /* ContentView.swift in Sources */,
 				B0007F9F2D5D35A6003C682A /* ChefMate_Recipe_AppApp.swift in Sources */,
+				B063E27E2D832F740017759E /* Filter.swift in Sources */,
 				5DD8E00D2D66749C00C05C35 /* LoginScreen.swift in Sources */,
 				B063E2742D81F53F0017759E /* Recipe.swift in Sources */,
 			);
