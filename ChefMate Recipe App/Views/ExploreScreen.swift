@@ -10,10 +10,45 @@ import SwiftUI
 struct ExploreScreen: View {
     @State var searchText = ""
     
-    var cuisineFilters: [Filter] = [
-        .init(name: "All", id: 1), .init(name: "African", id: 2), .init(name: "Asian", id: 3), .init(name: "American", id: 4), .init(name: "British", id: 5), .init(name: "Cajun", id: 5), .init(name: "Caribbean", id: 6), .init(name: "Chinese", id: 7), .init(name: "Eastern European", id: 8), .init(name: "European", id: 9), .init(name: "French", id: 10), .init(name: "German", id: 11), .init(name: "Greek", id: 12), .init(name: "Indian", id: 13), .init(name: "Irish", id: 14), .init(name: "Italian", id: 15), .init(name: "Japanese", id: 16), .init(name: "Jewish", id: 17), .init(name: "Jewish", id: 18), .init(name: "Korean", id: 19), .init(name: "Latin American", id: 20), .init(name: "Mediterranean", id: 21), .init(name: "Mexican", id: 22), .init(name: "Middle Eastern", id: 23), .init(name: "Nordic", id: 24), .init(name: "Southern", id: 25), .init(name: "Spanish", id: 26), .init(name: "Thai", id: 27), .init(name: "Vietnamese", id: 28),
-        
+    let rows = [
+        GridItem(.flexible()),
+        GridItem(.flexible()),
+        GridItem(.flexible()),
     ]
+    
+    var cuisineFilters: [CuisineFilter] = [
+        .init(name: "All"),
+        .init(name: "African"),
+        .init(name: "Asian"),
+        .init(name: "American"),
+        .init(name: "British"),
+        .init(name: "Cajun"),
+        .init(name: "Caribbean"),
+        .init(name: "Chinese"),
+        .init(name: "Eastern European"),
+        .init(name: "European"),
+        .init(name: "French"),
+        .init(name: "German"),
+        .init(name: "Greek"),
+        .init(name: "Indian"),
+        .init(name: "Irish"),
+        .init(name: "Italian"),
+        .init(name: "Japanese"),
+        .init(name: "Jewish"),
+        .init(name: "Jewish"),
+        .init(name: "Korean"),
+        .init(name: "Latin American"),
+        .init(name: "Mediterranean"),
+        .init(name: "Mexican"),
+        .init(name: "Middle Eastern"),
+        .init(name: "Nordic"),
+        .init(name: "Southern"),
+        .init(name: "Spanish"),
+        .init(name: "Thai"),
+        .init(name: "Vietnamese"),
+    ]
+    
+    @State private var selectedFilters: Set<Filter> = []
     
     var body: some View {
         VStack (alignment: .leading){
@@ -49,25 +84,24 @@ struct ExploreScreen: View {
                 Text("By Cuisine")
                     .font(.title3)
                 ScrollView(.horizontal, showsIndicators: false) {
-                    HStack{
-                        ForEach(cuisineFilters, id: \.id) {
+                    LazyHGrid(rows: rows, spacing: 5){
+                        ForEach(cuisineFilters) {
                             filter in
-                            // filter is constant
-                            var item = filter
                             Button {
-                                print("filter: \(filter.name.lowercased())")
-                                item.switchIsSelected()
+                                toggleFilter(filter)
+                                
                             } label: {
                                 Text(filter.name)
                                     .padding(.horizontal)
-                                    .background(.orange)
-                                    .foregroundStyle(.white)
+                                    .background(selectedFilters.contains(filter) ? .white : .orange)
+                                    .foregroundStyle(selectedFilters.contains(filter) ? .orange : .white)
                                     .clipShape(Capsule())
                                     
                             }.padding(.trailing, 4)
                         }
                     }
                 }.padding(.bottom)
+                    .frame(height: 100)
                 
                 Text("By Diet")
                     .font(.title3)
@@ -83,6 +117,15 @@ struct ExploreScreen: View {
             
             
             
+        }
+        
+    }
+    
+    private func toggleFilter(_ filter: Filter) {
+        if selectedFilters.contains(filter) {
+            selectedFilters.remove(filter)
+        } else {
+            selectedFilters.insert(filter)
         }
     }
 }

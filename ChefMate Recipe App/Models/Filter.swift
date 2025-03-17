@@ -7,18 +7,55 @@
 
 import Foundation
 
-struct Filter {
-    var id: Int
+class Filter: Identifiable, Hashable {
+    var id: UUID
     var name: String
-    var isSelected: Bool
     
-    init(name: String, id: Int) {
-        self.id = id
+    init(name: String) {
         self.name = name
-        self.isSelected = false
+        self.id = UUID()
     }
     
-    mutating func switchIsSelected() {
-        self.isSelected = !self.isSelected
+    func getEndpoint() -> String {
+        fatalError("Subclasses must override this method")
+    }
+    
+    //For it to conform Equatable
+    static func == (lhs: Filter, rhs: Filter) -> Bool {
+        return lhs.name == rhs.name
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(name)
+    }
+}
+
+class CuisineFilter: Filter {
+    override init(name: String) {
+        super.init(name: name)
+    }
+    
+    override func getEndpoint() -> String {
+        return "";
+    }
+}
+
+class DietFilter: Filter {
+    override init(name: String) {
+        super.init(name: name)
+    }
+    
+    override func getEndpoint() -> String {
+        return "";
+    }
+}
+
+class IngredientsFilter: Filter {
+    override init(name: String) {
+        super.init(name: name)
+    }
+    
+    override func getEndpoint() -> String {
+        return "";
     }
 }
