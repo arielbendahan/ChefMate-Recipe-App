@@ -15,9 +15,9 @@ struct HomeView: View {
                     ZStack {
                         Rectangle()
                             .fill(Color.white)
-                            .frame(height: 100)
+                            .frame(height: 125)
                             .shadow(color: .gray.opacity(0.5), radius: 5, x: 0, y: 3)
-                            .ignoresSafeArea()
+                            
                         
                         HStack {
                             Text("ChefMate")
@@ -25,7 +25,7 @@ struct HomeView: View {
                                 .bold()
                                 .foregroundColor(.orange)
                                 .padding(.leading)
-                                .padding(.bottom, 50)
+                                .padding(.top, 50)
                             Spacer()
                         }
                     }
@@ -37,6 +37,7 @@ struct HomeView: View {
                             .font(.title2)
                             .bold()
                             .padding(.leading)
+                            .padding(.top)
                         Spacer()
                     }
                     RecipeScrollView()
@@ -71,7 +72,7 @@ struct HomeView: View {
                     
                     Spacer()
                 }
-            }
+            }.ignoresSafeArea()
         }
     }
 }
