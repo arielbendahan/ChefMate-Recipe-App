@@ -63,12 +63,41 @@ class ApiManager {
         return recipes
     }
  
-    // Only query, first 10 results, no filters
-    func searchRecipes(query: String) async throws -> [Recipe] {
+    // query, first 10 results, with filters
+    func searchRecipes(query: String, filters: Set<Filter>) async throws -> [Recipe] {
         let endpoint = "/recipes/complexSearch"
         let urlString = "\(baseURL)\(endpoint)?query=\(query)&number=10&apiKey=\(apiKey)"
+
+        //apply filters if exists
+        if !filters.isEmpty {
+            cuisineList: [String] = []
+            dietList: [String] = []
+            ingredientList: [String] = []
+
+            for filter in filters {
+                switch filter.type {
+                case .cuisine:
+                    cuisineList.append(filter.name)
+                case .diet:
+                    dietList.append(filter.name)
+                case .ingredient:
+                    ingredientList.append(filter.name)
+                }
+            }
+
+            if !cuisineList.isEmpty {
+                urlString += "&cuisine=\(cuisineList.joined(separator: ","))"
+            }
+            if !dietList.isEmpty {
+                urlString += "&diet=\(dietList.joined(separator: ","))"
+            }
+            if !ingredientList.isEmpty {
+                urlString += "&includeIngredients=\(ingredientList.joined(separator: ","))"
+            }
+        }
  
-        guard let url = URL(string: urlString) else {
+        //Ensure the url is valid. In spoonacular, query and filters can include spaces, so we need to encode the url
+        guard let url = URL(string: urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!) else {
             throw APIError.invalidURL
         }
  
@@ -82,23 +111,6 @@ class ApiManager {
         return decodedResponse.results
     }
     
-    func searchRecipesByCuisine(cuisine: String) async throws -> [Recipe] {
-        let endpoint = "/recipes/complexSearch"
-        let urlString = "\(baseURL)\(endpoint)?cuisine=\(cuisine)&number=10&apiKey=\(apiKey)"
- 
-        guard let url = URL(string: urlString) else {
-            throw APIError.invalidURL
-        }
- 
-        let (data, response) = try await URLSession.shared.data(from: url)
- 
-        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-            throw APIError.invalidResponse
-        }
- 
-        let decodedResponse = try JSONDecoder().decode(RecipeResponse.self, from: data)
-        return decodedResponse.results
-    }
 }
  
 struct RecipeResponse: Codable {

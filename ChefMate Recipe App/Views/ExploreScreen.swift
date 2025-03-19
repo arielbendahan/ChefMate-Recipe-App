@@ -10,10 +10,47 @@ import SwiftUI
 struct ExploreScreen: View {
     @State var searchText = ""
     
-    var cuisineFilters: [Filter] = [
-        .init(name: "All", id: 1), .init(name: "African", id: 2), .init(name: "Asian", id: 3), .init(name: "American", id: 4), .init(name: "British", id: 5), .init(name: "Cajun", id: 5), .init(name: "Caribbean", id: 6), .init(name: "Chinese", id: 7), .init(name: "Eastern European", id: 8), .init(name: "European", id: 9), .init(name: "French", id: 10), .init(name: "German", id: 11), .init(name: "Greek", id: 12), .init(name: "Indian", id: 13), .init(name: "Irish", id: 14), .init(name: "Italian", id: 15), .init(name: "Japanese", id: 16), .init(name: "Jewish", id: 17), .init(name: "Jewish", id: 18), .init(name: "Korean", id: 19), .init(name: "Latin American", id: 20), .init(name: "Mediterranean", id: 21), .init(name: "Mexican", id: 22), .init(name: "Middle Eastern", id: 23), .init(name: "Nordic", id: 24), .init(name: "Southern", id: 25), .init(name: "Spanish", id: 26), .init(name: "Thai", id: 27), .init(name: "Vietnamese", id: 28),
-        
+    let rows = [
+        GridItem(.flexible()),
+        GridItem(.flexible()),
+        GridItem(.flexible()),
     ]
+    
+    
+    var cuisineFilters: [Filter] = [
+        .init(name: "All", type: .cuisine),
+        .init(name: "African", type: .cuisine),
+        .init(name: "Asian", type: .cuisine),
+        .init(name: "American", type: .cuisine),
+        .init(name: "British", type: .cuisine),
+        .init(name: "Cajun", type: .cuisine),
+        .init(name: "Caribbean", type: .cuisine),
+        .init(name: "Chinese", type: .cuisine),
+        .init(name: "Eastern European", type: .cuisine),
+        .init(name: "European", type: .cuisine),
+        .init(name: "French", type: .cuisine),
+        .init(name: "German", type: .cuisine),
+        .init(name: "Greek", type: .cuisine),
+        .init(name: "Indian", type: .cuisine),
+        .init(name: "Irish", type: .cuisine),
+        .init(name: "Italian", type: .cuisine),
+        .init(name: "Japanese", type: .cuisine),
+        .init(name: "Jewish", type: .cuisine),
+        .init(name: "Jewish", type: .cuisine),
+        .init(name: "Korean", type: .cuisine),
+        .init(name: "Latin American", type: .cuisine),
+        .init(name: "Mediterranean", type: .cuisine),
+        .init(name: "Mexican", type: .cuisine),
+        .init(name: "Middle Eastern", type: .cuisine),
+        .init(name: "Nordic", type: .cuisine),
+        .init(name: "Southern", type: .cuisine),
+        .init(name: "Spanish", type: .cuisine),
+        .init(name: "Thai", type: .cuisine),
+        .init(name: "Vietnamese", type: .cuisine),
+    ]
+    
+
+    @State private var selectedFilters: Set<Filter> = []
     
     var body: some View {
         VStack (alignment: .leading){
@@ -49,25 +86,24 @@ struct ExploreScreen: View {
                 Text("By Cuisine")
                     .font(.title3)
                 ScrollView(.horizontal, showsIndicators: false) {
-                    HStack{
-                        ForEach(cuisineFilters, id: \.id) {
+                    LazyHGrid(rows: rows, spacing: 5){
+                        ForEach(cuisineFilters) {
                             filter in
-                            // filter is constant
-                            var item = filter
                             Button {
-                                print("filter: \(filter.name.lowercased())")
-                                item.switchIsSelected()
+                                toggleFilter(filter)
+                                
                             } label: {
                                 Text(filter.name)
                                     .padding(.horizontal)
-                                    .background(.orange)
-                                    .foregroundStyle(.white)
+                                    .background(selectedFilters.contains(filter) ? .white : .orange)
+                                    .foregroundStyle(selectedFilters.contains(filter) ? .orange : .white)
                                     .clipShape(Capsule())
                                     
                             }.padding(.trailing, 4)
                         }
                     }
                 }.padding(.bottom)
+                    .frame(height: 100)
                 
                 Text("By Diet")
                     .font(.title3)
@@ -83,6 +119,15 @@ struct ExploreScreen: View {
             
             
             
+        }
+        
+    }
+    
+    private func toggleFilter(_ filter: Filter) {
+        if selectedFilters.contains(filter) {
+            selectedFilters.remove(filter)
+        } else {
+            selectedFilters.insert(filter)
         }
     }
 }
