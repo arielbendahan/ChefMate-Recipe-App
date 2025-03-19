@@ -35,7 +35,6 @@ struct RecipeCard: View {
                 }
             }
             .frame(height: 160)
-            //.cornerRadius(15, corners: [.topLeft, .topRight]) // Rounded top corners
             
             VStack(alignment: .leading, spacing: 8) {
                 Text(recipe.title)
@@ -54,7 +53,7 @@ struct RecipeCard: View {
                     
                     Label("\(Int(recipe.spoonacularScore.rounded()))", systemImage: "star.fill")
                         .font(.subheadline)
-                        .foregroundColor(.orange) // Improved visibility
+                        .foregroundColor(.orange)
                 }
             }
             .padding()
