@@ -17,7 +17,7 @@ class ApiManager {
     
     func fetchRecipesIds() async throws -> [Int] {
         let endpoint = "/recipes/complexSearch"
-        let urlString = "\(baseURL)\(endpoint)?number=10&apiKey=\(apiKey)"
+        let urlString = "\(baseURL)\(endpoint)?number=10&instructionsRequired=true&apiKey=\(apiKey)"
  
         guard let url = URL(string: urlString) else {
             throw APIError.invalidURL

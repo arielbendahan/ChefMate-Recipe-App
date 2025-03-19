@@ -19,7 +19,7 @@ struct RecipeCard: View {
                     switch phase {
                     case .empty:
                         ProgressView()
-                            .frame(width: 200, height: 200)
+                            .frame(width: 200, height: 160)
                     case .success(let image):
                         image
                             .resizable()
@@ -28,7 +28,7 @@ struct RecipeCard: View {
                             .clipped()
                     case .failure:
                         Color.gray
-                            .frame(width: 200, height: 200)
+                            .frame(width: 200, height: 160)
                     @unknown default:
                         EmptyView()
                     }
@@ -40,8 +40,9 @@ struct RecipeCard: View {
                 Text(recipe.title)
                     .font(.headline)
                     .foregroundColor(.black)
-                    .frame(height: 50)
+                    .frame(height: 50, alignment: .topLeading)
                     .multilineTextAlignment(.leading)
+                    .lineLimit(2)
                 
                 HStack {
                     Label("\(recipe.readyInMinutes) min", systemImage: "clock")
@@ -52,7 +53,7 @@ struct RecipeCard: View {
                     
                     Label("\(Int(recipe.spoonacularScore.rounded()))", systemImage: "star.fill")
                         .font(.subheadline)
-                        .foregroundColor(.yellow)
+                        .foregroundColor(.orange)
                 }
             }
             .padding()
@@ -71,8 +72,15 @@ struct RecipeCard_Previews: PreviewProvider {
             id: 12345,
             title: "Spaghetti Carbonara",
             image: "https://img.spoonacular.com/recipes/12345-312x231.jpg",
-            readyInMinutes: 20,
-            spoonacularScore: 84.3
+            readyInMinutes: 25,
+            preparationMinutes: 10,
+            cookingMinutes: 15,
+            extendedIngredients: [],
+            instructions: "Cook spaghetti. Fry pancetta. Mix eggs with cheese. Combine all.",
+            summary: "A classic Italian pasta dish with eggs, cheese, pancetta, and pepper.",
+            spoonacularScore: 87.5
         ))
+        .previewLayout(.sizeThatFits)
+        .padding()
     }
 }
