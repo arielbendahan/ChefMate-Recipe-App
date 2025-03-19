@@ -19,8 +19,9 @@ struct Filter: Identifiable, Hashable {
     var name: String
     let type: FilterType
     
-    init(name: String) {
+    init(name: String, type: FilterType) {
         self.name = name
+        self.type = type
         self.id = UUID()
     }
     

@@ -66,13 +66,13 @@ class ApiManager {
     // query, first 10 results, with filters
     func searchRecipes(query: String, filters: Set<Filter>) async throws -> [Recipe] {
         let endpoint = "/recipes/complexSearch"
-        let urlString = "\(baseURL)\(endpoint)?query=\(query)&number=10&apiKey=\(apiKey)"
+        var urlString = "\(baseURL)\(endpoint)?query=\(query)&number=10&apiKey=\(apiKey)"
 
         //apply filters if exists
         if !filters.isEmpty {
-            cuisineList: [String] = []
-            dietList: [String] = []
-            ingredientList: [String] = []
+            var cuisineList: [String] = []
+            var dietList: [String] = []
+            var ingredientList: [String] = []
 
             for filter in filters {
                 switch filter.type {
