@@ -28,6 +28,7 @@
 		B063E27E2D832F740017759E /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B063E27D2D832F740017759E /* Filter.swift */; };
 		B08D78EF2D876FDC00621B21 /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08D78EE2D876FDC00621B21 /* Ingredient.swift */; };
 		B08D78F12D87732A00621B21 /* Recipe Card Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08D78F02D87732A00621B21 /* Recipe Card Model.swift */; };
+		B09646D72D8A50FB00C481AB /* StripHTML.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09646D62D8A50FB00C481AB /* StripHTML.swift */; };
 		B0A585A32D79F039009EEAC1 /* RegisterScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A585A22D79F039009EEAC1 /* RegisterScreen.swift */; };
 		B0A585A52D79FD35009EEAC1 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A585A42D79FD35009EEAC1 /* HomeView.swift */; };
 /* End PBXBuildFile section */
@@ -53,6 +54,7 @@
 		B063E27D2D832F740017759E /* Filter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		B08D78EE2D876FDC00621B21 /* Ingredient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
 		B08D78F02D87732A00621B21 /* Recipe Card Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Recipe Card Model.swift"; sourceTree = "<group>"; };
+		B09646D62D8A50FB00C481AB /* StripHTML.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StripHTML.swift; sourceTree = "<group>"; };
 		B0A585A22D79F039009EEAC1 /* RegisterScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterScreen.swift; sourceTree = "<group>"; };
 		B0A585A42D79FD35009EEAC1 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -94,6 +96,7 @@
 				5DD8E00E2D6674AF00C05C35 /* User.swift */,
 				B08D78EE2D876FDC00621B21 /* Ingredient.swift */,
 				B08D78F02D87732A00621B21 /* Recipe Card Model.swift */,
+				B09646D62D8A50FB00C481AB /* StripHTML.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -231,6 +234,7 @@
 				5DD8E0002D666B0400C05C35 /* HomeScreen.swift in Sources */,
 				B08D78F12D87732A00621B21 /* Recipe Card Model.swift in Sources */,
 				B063E2722D81F4F60017759E /* ApiManager.swift in Sources */,
+				B09646D72D8A50FB00C481AB /* StripHTML.swift in Sources */,
 				B08D78EF2D876FDC00621B21 /* Ingredient.swift in Sources */,
 				B063E2762D8206000017759E /* RecipeScrollView.swift in Sources */,
 				5DD8DFFE2D6665F900C05C35 /* SplashScreen.swift in Sources */,

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     var body: some View {
-        ScrollView{
+        ScrollView {
             VStack {
                 ZStack {
                     Rectangle()
@@ -17,7 +17,6 @@ struct HomeView: View {
                         .frame(height: 100) // Adjust height as needed
                         .shadow(color: .gray.opacity(0.5), radius: 5, x: 0, y: 3)
                         .ignoresSafeArea()
-                    
                     
                     HStack {
                         Text("ChefMate")
@@ -30,6 +29,8 @@ struct HomeView: View {
                     }
                 }
                 .frame(maxWidth: .infinity)
+
+                // Featured Recipes Title
                 HStack {
                     Text("Featured Recipes")
                         .font(.title2)
@@ -38,9 +39,13 @@ struct HomeView: View {
                     Spacer()
                 }
                 RecipeScrollView()
+                    .frame(height: 400) // Ensure RecipeScrollView has a height
+
                 Divider()
                     .frame(width: 300)
                     .padding()
+
+                // Trending Recipes Title
                 HStack {
                     Text("Trending Recipes")
                         .font(.title2)
@@ -48,11 +53,12 @@ struct HomeView: View {
                         .padding(.leading)
                     Spacer()
                 }
-                // DO NOT UNCOMMENT OR TURN OFF PREVIEWS BECAUSE THIS WILL DRAIN THE API LIMIT FOR THE DAY
-                //RecipeScrollView()
+                // RecipeScrollView()
                 Divider()
                     .frame(width: 300)
                     .padding()
+
+                // Favourited Recipes Title
                 HStack {
                     Text("Favourited Recipes")
                         .font(.title2)
@@ -60,11 +66,9 @@ struct HomeView: View {
                         .padding(.leading)
                     Spacer()
                 }
-                // DO NOT UNCOMMENT OR TURN OFF PREVIEWS BECAUSE THIS WILL DRAIN THE API LIMIT FOR THE DAY
-                //RecipeScrollView()
-                
+                // RecipeScrollView()
+
                 Spacer()
-                
             }
         }
     }

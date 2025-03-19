@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct RecipeScrollView: View {
-    @State private var recipes: [RecipeCardModel] = []
+    @State private var recipes: [Recipe] = []
     
     var body: some View {
         NavigationView {
@@ -19,10 +19,8 @@ struct RecipeScrollView: View {
         .buttonStyle(PlainButtonStyle())
         .task {
             do {
-                let fetchedRecipes = try await ApiManager.shared.fetchRecipes()
-                recipes = fetchedRecipes.map { recipe in
-                    RecipeCardModel(id: recipe.id, title: recipe.title, image: recipe.image, readyInMinutes: recipe.readyInMinutes, spoonacularScore: recipe.spoonacularScore)
-                }
+                recipes = try await ApiManager.shared.fetchRecipes()
+                print("Fetched recipes:", recipes)
             }
             catch
             {

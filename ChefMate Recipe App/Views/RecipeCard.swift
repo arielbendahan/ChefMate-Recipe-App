@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RecipeCard: View {
-    let recipe: RecipeCardModel
+    let recipe: Recipe
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -69,12 +69,17 @@ struct RecipeCard: View {
 
 struct RecipeCard_Previews: PreviewProvider {
     static var previews: some View {
-        RecipeCard(recipe: RecipeCardModel(
+        RecipeCard(recipe: Recipe(
             id: 12345,
             title: "Spaghetti Carbonara",
             image: "https://img.spoonacular.com/recipes/12345-312x231.jpg",
-            readyInMinutes: 20,
-            spoonacularScore: 84.3
+            readyInMinutes: 25,
+            preparationMinutes: 10,
+            cookingMinutes: 15,
+            extendedIngredients: [],
+            instructions: "Cook spaghetti. Fry pancetta. Mix eggs with cheese. Combine all.",
+            summary: "A classic Italian pasta dish with eggs, cheese, pancetta, and pepper.",
+            spoonacularScore: 87.5
         ))
         .previewLayout(.sizeThatFits)
         .padding()

@@ -24,15 +24,21 @@ struct RecipeInfoView: View {
                     
                     // Time Info
                     HStack {
-                        Text("Prep: \(recipe.preparationMinutes) min")
-                        Text("Cook: \(recipe.cookingMinutes) min")
+                        
+                        if let prepMinutes = recipe.preparationMinutes {
+                            Text("Prep: \(prepMinutes) min")
+                        }
+
+                        if let cookMinutes = recipe.cookingMinutes {
+                            Text("Cook: \(cookMinutes) min")
+                        }
                         Text("Total: \(recipe.readyInMinutes) min")
                     }
                     .font(.subheadline)
                     .foregroundColor(.gray)
                     
                     // Short Description
-                    Text(recipe.summary)
+                    Text(recipe.summary.stripHTML)
                         .font(.body)
                         .padding(.vertical)
                     
@@ -50,10 +56,7 @@ struct RecipeInfoView: View {
                         .font(.title2)
                         .fontWeight(.bold)
                     
-                    ForEach(recipe.instructions.indices, id: \.self) { index in
-                        Text("\(index + 1). \(recipe.instructions[index])")
-                            .padding(.vertical, 2)
-                    }
+                    Text(recipe.instructions)
                 }
                 .padding()
             } else {
@@ -67,7 +70,7 @@ struct RecipeInfoView: View {
         Task {
             do {
                 let details = try await ApiManager.shared.fetchRecipeDetails(for: recipeId)
-                self.recipeDetail = details // Update the state on the main thread
+                self.recipeDetail = details
             } catch {
                 print("Error fetching details: \(error.localizedDescription)")
             }
@@ -77,6 +80,6 @@ struct RecipeInfoView: View {
 
 struct RecipeInfoView_Previews: PreviewProvider {
     static var previews: some View {
-        RecipeInfoView(recipeId: 716429)
+        RecipeInfoView(recipeId: 715415)
     }
 }
