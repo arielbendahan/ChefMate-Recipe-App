@@ -7,18 +7,23 @@
 
 import Foundation
 
-class Filter: Identifiable, Hashable {
+struct Filter: Identifiable, Hashable {
+    enum FilterType {
+        case cuisine
+        case diet
+        case ingredient
+    }
+
+
     var id: UUID
     var name: String
+    let type: FilterType
     
     init(name: String) {
         self.name = name
         self.id = UUID()
     }
     
-    func getEndpoint() -> String {
-        fatalError("Subclasses must override this method")
-    }
     
     //For it to conform Equatable
     static func == (lhs: Filter, rhs: Filter) -> Bool {
@@ -27,35 +32,5 @@ class Filter: Identifiable, Hashable {
     
     func hash(into hasher: inout Hasher) {
         hasher.combine(name)
-    }
-}
-
-class CuisineFilter: Filter {
-    override init(name: String) {
-        super.init(name: name)
-    }
-    
-    override func getEndpoint() -> String {
-        return "";
-    }
-}
-
-class DietFilter: Filter {
-    override init(name: String) {
-        super.init(name: name)
-    }
-    
-    override func getEndpoint() -> String {
-        return "";
-    }
-}
-
-class IngredientsFilter: Filter {
-    override init(name: String) {
-        super.init(name: name)
-    }
-    
-    override func getEndpoint() -> String {
-        return "";
     }
 }
