@@ -48,7 +48,8 @@ struct RecipeInfoView: View {
                         .fontWeight(.bold)
                     
                     ForEach(recipe.extendedIngredients, id: \.name) { ingredient in
-                        Text("• \(ingredient.amount) \(ingredient.unit) \(ingredient.name)")
+                        let fraction = fractionize(ingredient.amount)
+                        Text("• \(fraction) \(ingredient.unit) \(ingredient.name)")
                     }
                     
                     // Instructions
@@ -56,7 +57,7 @@ struct RecipeInfoView: View {
                         .font(.title2)
                         .fontWeight(.bold)
                     
-                    Text(recipe.instructions)
+                    Text(recipe.instructions.stripHTML)
                 }
                 .padding()
             } else {
@@ -64,7 +65,8 @@ struct RecipeInfoView: View {
                     .onAppear { fetchRecipeDetails() }
             }
         }
-        .navigationTitle("Recipe Details")
+        .navigationTitle("")
+        .navigationBarTitleDisplayMode(.inline)
     }
     func fetchRecipeDetails() {
         Task {
@@ -75,6 +77,27 @@ struct RecipeInfoView: View {
                 print("Error fetching details: \(error.localizedDescription)")
             }
         }
+    }
+    func fractionize(_ value: Double) -> String {
+        let wholeNumber = Int(value) // Extract the whole number part
+        let decimalPart = value - Double(wholeNumber) // Get the decimal part
+
+        let commonFractions: [(Double, String)] = [
+            (0.125, "⅛"), (0.25, "¼"), (0.333, "⅓"), (0.5, "½"),
+            (0.666, "⅔"), (0.75, "¾"), (1.0, "1")
+        ]
+
+        for (decimal, fraction) in commonFractions {
+            if abs(decimalPart - decimal) < 0.02 {
+                if wholeNumber > 0 {
+                    return "\(wholeNumber) \(fraction)"
+                } else {
+                    return fraction
+                }
+            }
+        }
+
+        return wholeNumber > 0 ? "\(wholeNumber)" : String(format: "%.2f", value)
     }
 }
 

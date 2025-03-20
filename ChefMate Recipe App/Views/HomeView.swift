@@ -41,7 +41,7 @@ struct HomeView: View {
                         Spacer()
                     }
                     RecipeScrollView()
-                        .frame(height: 400)
+                        .frame(minHeight: 200)
                     
                     Divider()
                         .frame(width: 300)

@@ -4,7 +4,6 @@ struct RecipeScrollView: View {
     @State private var recipes: [Recipe] = []
     
     var body: some View {
-        NavigationView {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 50) {
                     ForEach(recipes, id: \.id) { recipe in
@@ -15,7 +14,6 @@ struct RecipeScrollView: View {
                 }
                 .padding()
             }
-        }
         .buttonStyle(PlainButtonStyle())
         .task {
             do {
