@@ -31,6 +31,8 @@
 		B09646D72D8A50FB00C481AB /* StripHTML.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09646D62D8A50FB00C481AB /* StripHTML.swift */; };
 		B0A585A32D79F039009EEAC1 /* RegisterScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A585A22D79F039009EEAC1 /* RegisterScreen.swift */; };
 		B0A585A52D79FD35009EEAC1 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A585A42D79FD35009EEAC1 /* HomeView.swift */; };
+		D77165DA2D8F666C00886C91 /* RecipeSearchBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77165D92D8F666200886C91 /* RecipeSearchBuilder.swift */; };
+		D77165E02D8F79A600886C91 /* RecipeSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77165DF2D8F799100886C91 /* RecipeSearchResult.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +59,8 @@
 		B09646D62D8A50FB00C481AB /* StripHTML.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StripHTML.swift; sourceTree = "<group>"; };
 		B0A585A22D79F039009EEAC1 /* RegisterScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterScreen.swift; sourceTree = "<group>"; };
 		B0A585A42D79FD35009EEAC1 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		D77165D92D8F666200886C91 /* RecipeSearchBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeSearchBuilder.swift; sourceTree = "<group>"; };
+		D77165DF2D8F799100886C91 /* RecipeSearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeSearchResult.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +95,8 @@
 		5DD8DFFC2D66659100C05C35 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				D77165DF2D8F799100886C91 /* RecipeSearchResult.swift */,
+				D77165D92D8F666200886C91 /* RecipeSearchBuilder.swift */,
 				B063E27D2D832F740017759E /* Filter.swift */,
 				B063E2732D81F53F0017759E /* Recipe.swift */,
 				5DD8E00E2D6674AF00C05C35 /* User.swift */,
@@ -232,6 +238,7 @@
 				B063E27A2D83078F0017759E /* ExploreScreen.swift in Sources */,
 				B0A585A52D79FD35009EEAC1 /* HomeView.swift in Sources */,
 				5DD8E0002D666B0400C05C35 /* HomeScreen.swift in Sources */,
+				D77165E02D8F79A600886C91 /* RecipeSearchResult.swift in Sources */,
 				B08D78F12D87732A00621B21 /* Recipe Card Model.swift in Sources */,
 				B063E2722D81F4F60017759E /* ApiManager.swift in Sources */,
 				B09646D72D8A50FB00C481AB /* StripHTML.swift in Sources */,
@@ -240,6 +247,7 @@
 				5DD8DFFE2D6665F900C05C35 /* SplashScreen.swift in Sources */,
 				5DD8E0122D6675B800C05C35 /* FirebaseManager.swift in Sources */,
 				5DD8E00F2D6674AF00C05C35 /* User.swift in Sources */,
+				D77165DA2D8F666C00886C91 /* RecipeSearchBuilder.swift in Sources */,
 				B0A585A32D79F039009EEAC1 /* RegisterScreen.swift in Sources */,
 				B0007FA12D5D35A6003C682A /* ContentView.swift in Sources */,
 				B0007F9F2D5D35A6003C682A /* ChefMate_Recipe_AppApp.swift in Sources */,

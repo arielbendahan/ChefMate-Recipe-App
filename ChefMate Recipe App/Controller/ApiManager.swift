@@ -64,55 +64,41 @@ class ApiManager {
     }
  
     // query, first 10 results, with filters
-    func searchRecipes(query: String, filters: Set<Filter>) async throws -> [Recipe] {
+    func searchRecipe(query: String, filters: Set<Filter>) async throws -> [RecipeSearchResult] {
         let endpoint = "/recipes/complexSearch"
-        var urlString = "\(baseURL)\(endpoint)?query=\(query)&number=10&apiKey=\(apiKey)"
+        var urlString = "\(baseURL)\(endpoint)?number=10&instructionsRequired=true&apiKey=\(apiKey)"
 
-        //apply filters if exists
-        if !filters.isEmpty {
-            var cuisineList: [String] = []
-            var dietList: [String] = []
-            var ingredientList: [String] = []
+        let builder = RecipeSearchBuilder(query: query)
 
-            for filter in filters {
-                switch filter.type {
-                case .cuisine:
-                    cuisineList.append(filter.name)
-                case .diet:
-                    dietList.append(filter.name)
-                case .ingredient:
-                    ingredientList.append(filter.name)
-                }
-            }
-
-            if !cuisineList.isEmpty {
-                urlString += "&cuisine=\(cuisineList.joined(separator: ","))"
-            }
-            if !dietList.isEmpty {
-                urlString += "&diet=\(dietList.joined(separator: ","))"
-            }
-            if !ingredientList.isEmpty {
-                urlString += "&includeIngredients=\(ingredientList.joined(separator: ","))"
-            }
+        for filter in filters {
+            filter.apply(to: builder)
         }
- 
+
+        urlString += builder.build()
+
         //Ensure the url is valid. In spoonacular, query and filters can include spaces, so we need to encode the url
         guard let url = URL(string: urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!) else {
             throw APIError.invalidURL
         }
- 
+     
         let (data, response) = try await URLSession.shared.data(from: url)
- 
+     
         guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+            print(urlString)
             throw APIError.invalidResponse
         }
- 
-        let decodedResponse = try JSONDecoder().decode(RecipeResponse.self, from: data)
+     
+        let decodedResponse = try JSONDecoder().decode(RecipeSearchResultResponse.self, from: data)
         return decodedResponse.results
     }
     
 }
- 
+
+struct RecipeSearchResultResponse: Codable {
+    let results: [RecipeSearchResult]
+}
+
+
 struct RecipeResponse: Codable {
     let results: [Recipe]
 }
