@@ -8,6 +8,16 @@ struct RecipeInfoView: View {
         ScrollView {
             if let recipe = recipeDetail {
                 VStack(alignment: .leading, spacing: 10) {
+                    HStack {
+                        Spacer()
+                        Button {
+                            
+                        } label: {
+                            Image(systemName: "star")
+                                .font(.system(size: 25))
+                                .foregroundColor(.yellow)
+                        }
+                    }.padding(.bottom, 15)
                     // Recipe Image
                     AsyncImage(url: URL(string: recipe.image)) { image in
                         image.resizable().scaledToFit()
