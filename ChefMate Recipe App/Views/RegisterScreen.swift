@@ -76,7 +76,7 @@ struct RegisterScreen: View {
             return
         }
         
-        let user = UserModel(email: email, password: password)
+        let user = UserModel(id: "",email: email, password: password)
         authManager.register(user: user) { success in
                 if success {
                     isLoggedIn = true

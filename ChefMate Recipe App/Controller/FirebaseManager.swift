@@ -8,11 +8,13 @@
 import Foundation
 import FirebaseCore
 import FirebaseAuth
+import FirebaseFirestore
 
 class AuthManager : ObservableObject {
     @Published var user: User?
     @Published var errorMessage: String?
     @Published var isAuthenticated = false
+    private let db = Firestore.firestore()
     
     init(){
         self.user = Auth.auth().currentUser
@@ -43,7 +45,7 @@ class AuthManager : ObservableObject {
     func register(user: UserModel, completion: @escaping (Bool) -> Void) {
         Auth.auth().createUser(withEmail: user.email, password: user.password) { result, error in
             DispatchQueue.main.async {
-                if let error = error as NSError?{
+                if let error = error as NSError? {
                     switch error.code {
                     case AuthErrorCode.invalidEmail.rawValue:
                         self.errorMessage = "Email not in correct format."
@@ -55,15 +57,23 @@ class AuthManager : ObservableObject {
                         self.errorMessage = error.localizedDescription
                     }
                     completion(false)
-                } else {
-                    self.user = result?.user
+                } else if let user = result?.user {
+                    self.user = user
                     self.isAuthenticated = true
-                    print("Register successful")
-                    completion(true)
+                    
+                    // Create a new user document in Firestore with an empty favourites array
+                    let newUser = UserModel(id: user.uid, email: user.email ?? "", password: "")
+                    self.saveUserDataToFirebase(user: newUser) { success in
+                        if success {
+                            print("Register successful and user saved in Firestore")
+                        }
+                        completion(success)
+                    }
                 }
             }
         }
     }
+
     
     func logout(completion: @escaping (Bool) -> Void) {
         do {
@@ -80,5 +90,23 @@ class AuthManager : ObservableObject {
             }
         }
     }
+    
+    func saveUserDataToFirebase(user: UserModel, completion: @escaping (Bool) -> Void) {
+        db.collection("users").document(user.id).setData([
+            "email": user.email,
+            "favouriteRecipes": []
+        ]) { error in
+            DispatchQueue.main.async {
+                if let error = error {
+                    print("Error saving user data: \(error.localizedDescription)")
+                    completion(false)
+                } else {
+                    print("User data saved successfully.")
+                    completion(true)
+                }
+            }
+        }
+    }
+
 
 }
