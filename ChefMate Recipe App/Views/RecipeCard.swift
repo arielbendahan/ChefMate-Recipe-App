@@ -76,7 +76,7 @@ struct RecipeCard_Previews: PreviewProvider {
             preparationMinutes: 10,
             cookingMinutes: 15,
             extendedIngredients: [],
-            instructions: "Cook spaghetti. Fry pancetta. Mix eggs with cheese. Combine all.",
+            analyzedInstructions: [],
             summary: "A classic Italian pasta dish with eggs, cheese, pancetta, and pepper.",
             spoonacularScore: 87.5
         ))

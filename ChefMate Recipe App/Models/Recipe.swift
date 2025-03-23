@@ -15,7 +15,7 @@ struct Recipe: Identifiable, Codable {
     let preparationMinutes: Int?
     let cookingMinutes: Int?
     let extendedIngredients: [Ingredient]
-    let instructions: String
+    let analyzedInstructions: [Instruction]
     let summary: String
     let spoonacularScore: Double
     

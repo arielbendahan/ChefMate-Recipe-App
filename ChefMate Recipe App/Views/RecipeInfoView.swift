@@ -28,7 +28,7 @@ struct RecipeInfoView: View {
                         if let prepMinutes = recipe.preparationMinutes {
                             Text("Prep: \(prepMinutes) min")
                         }
-
+                        
                         if let cookMinutes = recipe.cookingMinutes {
                             Text("Cook: \(cookMinutes) min")
                         }
@@ -57,7 +57,13 @@ struct RecipeInfoView: View {
                         .font(.title2)
                         .fontWeight(.bold)
                     
-                    Text(recipe.instructions.stripHTML)
+                    if let instructions = recipeDetail?.analyzedInstructions {
+                        ForEach(instructions, id: \.name) { instruction in
+                            ForEach(instruction.steps, id: \.number) { step in
+                                Text("**\(step.number).** \(step.step)")
+                            }
+                        }
+                    }
                 }
                 .padding()
             } else {
@@ -78,15 +84,16 @@ struct RecipeInfoView: View {
             }
         }
     }
+    // Converts decimal amount from API into a fraction for a nicer look
     func fractionize(_ value: Double) -> String {
-        let wholeNumber = Int(value) // Extract the whole number part
-        let decimalPart = value - Double(wholeNumber) // Get the decimal part
-
+        let wholeNumber = Int(value)
+        let decimalPart = value - Double(wholeNumber)
+        
         let commonFractions: [(Double, String)] = [
             (0.125, "⅛"), (0.25, "¼"), (0.333, "⅓"), (0.5, "½"),
             (0.666, "⅔"), (0.75, "¾"), (1.0, "1")
         ]
-
+        
         for (decimal, fraction) in commonFractions {
             if abs(decimalPart - decimal) < 0.02 {
                 if wholeNumber > 0 {
@@ -96,7 +103,7 @@ struct RecipeInfoView: View {
                 }
             }
         }
-
+        
         return wholeNumber > 0 ? "\(wholeNumber)" : String(format: "%.2f", value)
     }
 }
