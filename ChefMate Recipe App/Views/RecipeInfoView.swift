@@ -76,13 +76,13 @@ struct RecipeInfoView: View {
                     }
                 }
                 .padding()
+                .navigationTitle("")
+                .navigationBarTitleDisplayMode(.inline)
             } else {
                 ProgressView("Loading Recipe...")
                     .onAppear { fetchRecipeDetails() }
             }
         }
-        .navigationTitle("")
-        .navigationBarTitleDisplayMode(.inline)
     }
     func fetchRecipeDetails() {
         Task {

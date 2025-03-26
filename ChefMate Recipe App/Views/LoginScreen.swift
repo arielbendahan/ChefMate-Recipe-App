@@ -15,7 +15,6 @@ struct LoginScreen: View {
     @State private var errorMsg = ""
     @AppStorage("isLoggedIn") private var isLoggedIn = false
     var body: some View {
-        NavigationView {
             VStack {
                 Image("logo")
                     .resizable()
@@ -93,7 +92,8 @@ struct LoginScreen: View {
                 Alert(title: Text("Error"), message: Text(errorMsg), dismissButton: .default(Text("ok")))
                 
             }
-        }
+            .navigationTitle("")
+            .navigationBarTitleDisplayMode(.inline)
     }
     
     

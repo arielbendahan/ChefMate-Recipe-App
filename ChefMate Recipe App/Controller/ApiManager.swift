@@ -8,9 +8,9 @@ import Foundation
  
 class ApiManager {
     static let shared = ApiManager()
-    //private let apiKey = "7042b5e9c0ae40258bbb050bf01a6000"
+    private let apiKey = "7042b5e9c0ae40258bbb050bf01a6000"
     // Below is backup API Key incase we run out of calls
-    private let apiKey = "2472e0b98f1e476a813d92f8a13c4d76"
+    //private let apiKey = "2472e0b98f1e476a813d92f8a13c4d76"
     private let baseURL = "https://api.spoonacular.com/"
  
     private init() {}

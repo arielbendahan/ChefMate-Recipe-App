@@ -67,6 +67,8 @@ struct RegisterScreen: View {
             }.alert(isPresented: $showAlert) {
                 Alert(title: Text("Error"), message: Text(errorMsg), dismissButton: .default(Text("OK")))
             }
+            .navigationTitle("")
+            .navigationBarTitleDisplayMode(.inline)
     }
     
     private func submitRegister() {

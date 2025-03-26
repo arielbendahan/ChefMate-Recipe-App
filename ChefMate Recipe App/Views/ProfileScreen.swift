@@ -11,7 +11,6 @@ struct ProfileScreen: View {
     @StateObject private var authManager = AuthManager()
     @AppStorage("isLoggedIn") private var isLoggedIn = true
     var body: some View {
-        NavigationView{
             VStack {
                 HStack {
                     Text("Profile")
@@ -43,8 +42,8 @@ struct ProfileScreen: View {
                         .shadow(color: .orange.opacity(0.7), radius: 5)
                 }
                 Spacer()
-            }
-        }
+            }.navigationTitle("")
+                .navigationBarHidden(true)
     }
 }
 

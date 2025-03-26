@@ -8,7 +8,7 @@
 import SwiftUI
  
 struct ExploreScreen: View {
-    @State var searchText = "ap"
+    @State var searchText = ""
     
     let rows = [
         GridItem(.flexible()),
