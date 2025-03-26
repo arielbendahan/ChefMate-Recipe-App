@@ -18,11 +18,11 @@ struct HomeScreen: View {
                 .tabItem {
                     Image(systemName: "magnifyingglass.circle")
                 }
-            HomeView()
+            PortfolioScreen()
                 .tabItem {
                     Image(systemName: "book.fill")
                 }
-            HomeView()
+            ProfileScreen()
                 .tabItem {
                     Image(systemName: "person.circle.fill")
                 }
