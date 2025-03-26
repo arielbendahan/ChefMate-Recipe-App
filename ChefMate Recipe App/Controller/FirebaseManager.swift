@@ -107,6 +107,77 @@ class AuthManager : ObservableObject {
             }
         }
     }
+    
+    func addRecipeToFavorites(recipeId: Int, completion: @escaping (Bool) -> Void) {
+        guard let userId = user?.uid else {
+            completion(false)
+            return
+        }
+        
+        let userRef = db.collection("users").document(userId)
+        
+        userRef.updateData([
+            "favouriteRecipes": FieldValue.arrayUnion([recipeId])
+        ]) { error in
+            DispatchQueue.main.async {
+                if let error = error {
+                    print("Error adding favorite: \(error.localizedDescription)")
+                    completion(false)
+                } else {
+                    print("Recipe added to favorites.")
+                    completion(true)
+                }
+            }
+        }
+    }
+
+    func removeRecipeFromFavorites(recipeId: Int, completion: @escaping (Bool) -> Void) {
+        guard let userId = user?.uid else {
+            completion(false)
+            return
+        }
+        
+        let userRef = db.collection("users").document(userId)
+        
+        userRef.updateData([
+            "favouriteRecipes": FieldValue.arrayRemove([recipeId])
+        ]) { error in
+            DispatchQueue.main.async {
+                if let error = error {
+                    print("Error removing favorite: \(error.localizedDescription)")
+                    completion(false)
+                } else {
+                    print("Recipe removed from favorites.")
+                    completion(true)
+                }
+            }
+        }
+    }
+
+    func fetchFavoriteRecipes(completion: @escaping ([Int]?) -> Void) {
+        guard let userId = user?.uid else {
+            completion(nil)
+            return
+        }
+        
+        let userRef = db.collection("users").document(userId)
+        
+        userRef.getDocument { document, error in
+            DispatchQueue.main.async {
+                if let error = error {
+                    print("Error fetching favorites: \(error.localizedDescription)")
+                    completion(nil)
+                } else if let document = document, document.exists {
+                    let data = document.data()
+                    let favorites = data?["favouriteRecipes"] as? [Int] ?? []
+                    completion(favorites)
+                } else {
+                    completion(nil)
+                }
+            }
+        }
+    }
+
 
 
 }

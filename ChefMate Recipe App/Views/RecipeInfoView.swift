@@ -3,21 +3,12 @@ import SwiftUI
 struct RecipeInfoView: View {
     let recipeId: Int
     @State private var recipeDetail: Recipe? = nil
+    @State private var isFavorite = false
     
     var body: some View {
         ScrollView {
             if let recipe = recipeDetail {
                 VStack(alignment: .leading, spacing: 10) {
-                    HStack {
-                        Spacer()
-                        Button {
-                            
-                        } label: {
-                            Image(systemName: "star")
-                                .font(.system(size: 25))
-                                .foregroundColor(.yellow)
-                        }
-                    }.padding(.bottom, 15)
                     // Recipe Image
                     AsyncImage(url: URL(string: recipe.image)) { image in
                         image.resizable().scaledToFit()
@@ -28,9 +19,31 @@ struct RecipeInfoView: View {
                     .cornerRadius(10)
                     
                     // Recipe Title
-                    Text(recipe.title)
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
+                    HStack {
+                        Text(recipe.title)
+                            .font(.largeTitle)
+                            .fontWeight(.bold)
+                        Spacer()
+                        Button {
+                            if isFavorite {
+                                AuthManager().removeRecipeFromFavorites(recipeId: recipeId) { success in
+                                    if success {
+                                        isFavorite = false
+                                    }
+                                }
+                            } else {
+                                AuthManager().addRecipeToFavorites(recipeId: recipeId) { success in
+                                    if success {
+                                        isFavorite = true
+                                    }
+                                }
+                            }
+                        } label: {
+                            Image(systemName: isFavorite ? "star.fill" : "star")
+                                .font(.system(size: 35))
+                                .foregroundColor(.yellow)
+                        }
+                    }
                     
                     // Time Info
                     HStack {
@@ -81,6 +94,12 @@ struct RecipeInfoView: View {
             } else {
                 ProgressView("Loading Recipe...")
                     .onAppear { fetchRecipeDetails() }
+            }
+        }.onAppear {
+            AuthManager().fetchFavoriteRecipes { favorites in
+                if let favorites = favorites {
+                    isFavorite = favorites.contains(recipeId)
+                }
             }
         }
     }
