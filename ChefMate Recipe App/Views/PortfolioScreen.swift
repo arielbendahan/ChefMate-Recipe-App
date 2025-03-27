@@ -9,7 +9,17 @@ import SwiftUI
 
 struct PortfolioScreen: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            HStack {
+                Text("My Cookbook")
+                    .font(.title)
+                    .bold()
+                    .foregroundStyle(.orange)
+                    .padding()
+                Spacer()
+            }
+            Spacer()
+        }
     }
 }
 

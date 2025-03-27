@@ -96,6 +96,28 @@ class ApiManager {
         return decodedResponse.results
     }
     
+    // Fetch 10 random recipes (different that the search recipe function with no query as this is always random each call)
+    func fetchRandomRecipes() async throws -> [Recipe] {
+        let endpoint = "/recipes/random"
+        let urlString = "\(baseURL)\(endpoint)?number=10&instructionsRequired=true&apiKey=\(apiKey)"
+
+        guard let url = URL(string: urlString) else {
+            throw APIError.invalidURL
+        }
+
+        let (data, response) = try await URLSession.shared.data(from: url)
+
+        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+            throw APIError.invalidResponse
+        }
+
+        let decodedResponse = try JSONDecoder().decode(RecipeRandomResponse.self, from: data)
+        return decodedResponse.recipes
+    }
+
+    
+    
+    
 }
 
 struct RecipeSearchResultResponse: Codable {
@@ -105,6 +127,10 @@ struct RecipeSearchResultResponse: Codable {
 
 struct RecipeResponse: Codable {
     let results: [Recipe]
+}
+
+struct RecipeRandomResponse: Codable {
+    let recipes: [Recipe]
 }
  
 // Define custom errors

@@ -54,20 +54,20 @@ struct HomeView: View {
                             .padding(.leading)
                         Spacer()
                     }
-                    // RecipeScrollView()
+                     //RecipeScrollView()
                     Divider()
                         .frame(width: 300)
                         .padding()
                     
-                    // Favourited Recipes Title
+                    // New Recipes Title
                     HStack {
-                        Text("Favourited Recipes")
+                        Text("New Recipes")
                             .font(.title2)
                             .bold()
                             .padding(.leading)
                         Spacer()
                     }
-                    // RecipeScrollView()
+                     //RecipeScrollView()
                     
                     Spacer()
                 }

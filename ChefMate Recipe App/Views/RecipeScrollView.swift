@@ -17,7 +17,7 @@ struct RecipeScrollView: View {
         .buttonStyle(PlainButtonStyle())
         .task {
             do {
-                recipes = try await ApiManager.shared.fetchRecipes()
+                recipes = try await ApiManager.shared.fetchRandomRecipes()
                 print("Fetched recipes:", recipes)
             }
             catch

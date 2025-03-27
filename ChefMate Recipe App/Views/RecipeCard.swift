@@ -42,7 +42,7 @@ struct RecipeCard: View {
                     .foregroundColor(.black)
                     .frame(height: 50, alignment: .topLeading)
                     .multilineTextAlignment(.leading)
-                    .lineLimit(2)
+                    .lineLimit(3)
                 
                 HStack {
                     Label("\(recipe.readyInMinutes) min", systemImage: "clock")
