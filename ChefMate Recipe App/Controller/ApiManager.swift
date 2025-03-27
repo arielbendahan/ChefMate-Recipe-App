@@ -18,25 +18,7 @@ class ApiManager {
     private let baseURL = "https://api.spoonacular.com/"
  
     private init() {}
-    
-    func fetchRecipesIds() async throws -> [Int] {
-        let endpoint = "/recipes/complexSearch"
-        let urlString = "\(baseURL)\(endpoint)?number=10&instructionsRequired=true&apiKey=\(apiKey)"
- 
-        guard let url = URL(string: urlString) else {
-            throw APIError.invalidURL
-        }
- 
-        let (data, response) = try await URLSession.shared.data(from: url)
- 
-        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-            throw APIError.invalidResponse
-        }
- 
-        let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
-        let idList = json?["results"] as? [[String: Any]] ?? []
-        return idList.compactMap { $0["id"] as? Int }
-    }
+
     
     func fetchRecipeDetails(for id: Int) async throws -> Recipe {
         let urlString = "\(baseURL)/recipes/\(id)/information?apiKey=\(apiKey)"
@@ -56,21 +38,26 @@ class ApiManager {
  
     // Fetch 10 recipes, no query
     func fetchRecipes() async throws -> [Recipe] {
-        let ids = try await fetchRecipesIds()
-        var recipes: [Recipe] = []
-        
-        for id in ids{
-            let recipe = try await fetchRecipeDetails(for: id)
-            recipes.append(recipe)
+        let endpoint = "/recipes/complexSearch"
+        let urlString = "\(baseURL)\(endpoint)?number=10&addRecipeInformation=true&apiKey=\(apiKey)"
+ 
+        guard let url = URL(string: urlString) else {
+            throw APIError.invalidURL
         }
-        
-        return recipes
+ 
+        let (data, response) = try await URLSession.shared.data(from: url)
+ 
+        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+            throw APIError.invalidResponse
+        }
+ 
+        return try JSONDecoder().decode(RecipeResponse.self, from: data)
     }
  
     // query, first 10 results, with filters
     func searchRecipe(query: String, filters: Set<Filter>) async throws -> [RecipeSearchResult] {
         let endpoint = "/recipes/complexSearch"
-        var urlString = "\(baseURL)\(endpoint)?number=10&instructionsRequired=true&apiKey=\(apiKey)"
+        var urlString = "\(baseURL)\(endpoint)?number=10&instructionsRequired=true&addRecipeInformation=true&apiKey=\(apiKey)"
 
         let builder = RecipeSearchBuilder(query: query)
 
@@ -99,7 +86,7 @@ class ApiManager {
     // Fetch 10 random recipes (different that the search recipe function with no query as this is always random each call)
     func fetchRandomRecipes() async throws -> [Recipe] {
         let endpoint = "/recipes/random"
-        let urlString = "\(baseURL)\(endpoint)?number=10&instructionsRequired=true&apiKey=\(apiKey)"
+        let urlString = "\(baseURL)\(endpoint)?number=10&instructionsRequired=true&addRecipeInformation=true&apiKey=\(apiKey)"
 
         guard let url = URL(string: urlString) else {
             throw APIError.invalidURL
