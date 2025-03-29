@@ -14,8 +14,8 @@
             filePath = "ChefMate Recipe App/Controller/ApiManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "67"
-            endingLineNumber = "67"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
             landmarkName = "searchRecipe(query:filters:)"
             landmarkType = "7">
          </BreakpointContent>

@@ -50,14 +50,16 @@ class ApiManager {
         guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
             throw APIError.invalidResponse
         }
+        
+        let decodedResponse = try JSONDecoder().decode(RecipeResponse.self, from: data)
  
-        return try JSONDecoder().decode(RecipeResponse.self, from: data)
+        return decodedResponse.results
     }
  
     // query, first 10 results, with filters
-    func searchRecipe(query: String, filters: Set<Filter>) async throws -> [RecipeSearchResult] {
+    func searchRecipe(query: String, filters: Set<Filter>) async throws -> [Recipe] {
         let endpoint = "/recipes/complexSearch"
-        var urlString = "\(baseURL)\(endpoint)?number=10&instructionsRequired=true&addRecipeInformation=true&apiKey=\(apiKey)"
+        var urlString = "\(baseURL)\(endpoint)?number=10&instructionsRequired=true&fillIngredients=true&addRecipeInstructions=true&addRecipeInformation=true&apiKey=\(apiKey)"
 
         let builder = RecipeSearchBuilder(query: query)
 
@@ -79,7 +81,7 @@ class ApiManager {
             throw APIError.invalidResponse
         }
      
-        let decodedResponse = try JSONDecoder().decode(RecipeSearchResultResponse.self, from: data)
+        let decodedResponse = try JSONDecoder().decode(RecipeResponse.self, from: data)
         return decodedResponse.results
     }
     
@@ -105,10 +107,6 @@ class ApiManager {
     
     
     
-}
-
-struct RecipeSearchResultResponse: Codable {
-    let results: [RecipeSearchResult]
 }
 
 

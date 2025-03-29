@@ -8,7 +8,7 @@
 import SwiftUI
  
 struct ExploreScreen: View {
-    @State var searchText = ""
+    @State var searchText = "ap"
     
     let rows = [
         GridItem(.flexible()),
@@ -47,36 +47,36 @@ struct ExploreScreen: View {
             .init(name: "Vietnamese", type: .cuisine),
         ]
         
-        var dietFilters: [Filter] = [
-            .init(name: "Gluten Free", type: .diet),
-            .init(name: "Ketogenic", type: .diet),
-            .init(name: "Vegetarian", type: .diet),
-            .init(name: "Lacto-Vegetarian", type: .diet),
-            .init(name: "Ovo-Vegetarian", type: .diet),
-            .init(name: "Vegan", type: .diet),
-            .init(name: "Pescetarian", type: .diet),
-            .init(name: "Paleo", type: .diet),
-            .init(name: "Primal", type: .diet),
-            .init(name: "Low FODMAP", type: .diet),
-            .init(name: "Whole30", type: .diet),
-        ]
+    var dietFilters: [Filter] = [
+        .init(name: "Gluten Free", type: .diet),
+        .init(name: "Ketogenic", type: .diet),
+        .init(name: "Vegetarian", type: .diet),
+        .init(name: "Lacto-Vegetarian", type: .diet),
+        .init(name: "Ovo-Vegetarian", type: .diet),
+        .init(name: "Vegan", type: .diet),
+        .init(name: "Pescetarian", type: .diet),
+        .init(name: "Paleo", type: .diet),
+        .init(name: "Primal", type: .diet),
+        .init(name: "Low FODMAP", type: .diet),
+        .init(name: "Whole30", type: .diet),
+    ]
 
-        var mealTypeFilters: [Filter] = [
-            .init(name: "main course", type: .mealType),
-            .init(name: "bread", type: .mealType),
-            .init(name: "side dish", type: .mealType),
-            .init(name: "dessert", type: .mealType),
-            .init(name: "appetizer", type: .mealType),
-            .init(name: "salad", type: .mealType),
-            .init(name: "breakfast", type: .mealType),
-            .init(name: "soup", type: .mealType),
-            .init(name: "beverage", type: .mealType),
-            .init(name: "sauce", type: .mealType),
-            .init(name: "marinade", type: .mealType),
-            .init(name: "fingerfood", type: .mealType),
-            .init(name: "snack", type: .mealType),
-            .init(name: "drink", type: .mealType),
-        ]
+    var mealTypeFilters: [Filter] = [
+        .init(name: "main course", type: .mealType),
+        .init(name: "bread", type: .mealType),
+        .init(name: "side dish", type: .mealType),
+        .init(name: "dessert", type: .mealType),
+        .init(name: "appetizer", type: .mealType),
+        .init(name: "salad", type: .mealType),
+        .init(name: "breakfast", type: .mealType),
+        .init(name: "soup", type: .mealType),
+        .init(name: "beverage", type: .mealType),
+        .init(name: "sauce", type: .mealType),
+        .init(name: "marinade", type: .mealType),
+        .init(name: "fingerfood", type: .mealType),
+        .init(name: "snack", type: .mealType),
+        .init(name: "drink", type: .mealType),
+    ]
     
     //state booleans for the collapsable views
     @State private var isCuisineExpanded: Bool = false
@@ -88,7 +88,7 @@ struct ExploreScreen: View {
     
     @State private var selectedFilters: Set<Filter> = []
     
-    @State private var searchResultRecipe: [RecipeSearchResult] = []
+    @State private var searchResultRecipe: [Recipe] = []
     
     var body: some View {
         VStack (alignment: .leading){
@@ -135,7 +135,7 @@ struct ExploreScreen: View {
                         
                         Spacer()
                         
-                        Image(systemName: isCuisineExpanded ? "chevron.left" : "chevron.right")
+                        Image(systemName: isCuisineExpanded ? "chevron.up" : "chevron.down")
                     }
                 }.buttonStyle(PlainButtonStyle())
                 
@@ -177,7 +177,7 @@ struct ExploreScreen: View {
                         
                         Spacer()
                         
-                        Image(systemName: isDietExpanded ? "chevron.left" : "chevron.right")
+                        Image(systemName: isDietExpanded ? "chevron.up" : "chevron.down")
                     }
                 }.buttonStyle(PlainButtonStyle())
                 
@@ -219,7 +219,7 @@ struct ExploreScreen: View {
                         
                         Spacer()
                         
-                        Image(systemName: isMealTypeExpanded ? "chevron.left" : "chevron.right")
+                        Image(systemName: isMealTypeExpanded ? "chevron.up" : "chevron.down")
                     }
                 }.buttonStyle(PlainButtonStyle())
                 
@@ -249,7 +249,18 @@ struct ExploreScreen: View {
                 .animation(.easeInOut, value: isMealTypeExpanded)
 
             
-            Spacer()
+            //Spacer()
+            
+            //result scrollbview
+            ScrollView{
+                LazyVStack{
+                    ForEach(searchResultRecipe, id: \.id){ recipe in
+                        NavigationLink(destination: RecipeInfoView(recipeId: recipe.id)){
+                            RecipeSearchResult(recipe: recipe)
+                        }
+                    }
+                }
+            }
         }
         
     }
@@ -275,14 +286,15 @@ struct ExploreScreen: View {
         }
         
         //search recipes
+        
         do {
             searchResultRecipe = try await ApiManager.shared.searchRecipe(query: searchText, filters: selectedFilters)
-            
-            print("Fetched recipes: ", searchResultRecipe)
+            print("Recipe results: \(searchResultRecipe)")
         } catch {
             
             print("error searching recipes: \(error)")
         }
+        
         
         //empty search result text and selected filters
         searchText = ""
