@@ -19,6 +19,7 @@
 		B0007FA12D5D35A6003C682A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0007FA02D5D35A6003C682A /* ContentView.swift */; };
 		B0007FA32D5D35A8003C682A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B0007FA22D5D35A8003C682A /* Assets.xcassets */; };
 		B0007FA62D5D35A8003C682A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B0007FA52D5D35A8003C682A /* Preview Assets.xcassets */; };
+		B01FF11C2D99E7BF00B869FF /* PortfolioCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01FF11B2D99E7BF00B869FF /* PortfolioCard.swift */; };
 		B063E2722D81F4F60017759E /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B063E2712D81F4F60017759E /* ApiManager.swift */; };
 		B063E2742D81F53F0017759E /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = B063E2732D81F53F0017759E /* Recipe.swift */; };
 		B063E2762D8206000017759E /* RecipeScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B063E2752D8206000017759E /* RecipeScrollView.swift */; };
@@ -51,6 +52,7 @@
 		B0007FA02D5D35A6003C682A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		B0007FA22D5D35A8003C682A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B0007FA52D5D35A8003C682A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		B01FF11B2D99E7BF00B869FF /* PortfolioCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioCard.swift; sourceTree = "<group>"; };
 		B063E2712D81F4F60017759E /* ApiManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		B063E2732D81F53F0017759E /* Recipe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 		B063E2752D8206000017759E /* RecipeScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeScrollView.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 				B0A1A8052D947F3C006A484F /* PortfolioScreen.swift */,
 				B0A1A8072D94801E006A484F /* ProfileScreen.swift */,
 				D76595052D9896A400344DFC /* RecipeSearchResult.swift */,
+				B01FF11B2D99E7BF00B869FF /* PortfolioCard.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -251,6 +254,7 @@
 				B0A585A52D79FD35009EEAC1 /* HomeView.swift in Sources */,
 				B0A1A8082D94801E006A484F /* ProfileScreen.swift in Sources */,
 				B0F3074E2D90B5E900ACEA7F /* Instruction.swift in Sources */,
+				B01FF11C2D99E7BF00B869FF /* PortfolioCard.swift in Sources */,
 				5DD8E0002D666B0400C05C35 /* HomeScreen.swift in Sources */,
 				B0F307502D90B5F100ACEA7F /* Step.swift in Sources */,
 				B08D78F12D87732A00621B21 /* Recipe Card Model.swift in Sources */,

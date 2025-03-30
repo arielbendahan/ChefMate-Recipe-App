@@ -1,17 +1,17 @@
 //
-//  RecipeSearchResult.swift
+//  PortfolioCard.swift
 //  ChefMate Recipe App
 //
-//  Created by user939647 on 3/29/25.
+//  Created by Ariel on 2025-03-30.
 //
 
 import SwiftUI
 
-struct RecipeSearchResult: View {
-    let recipe: Recipe
-    
+struct PortfolioCard: View {
+    let recipe: RecipeCardModel
     var body: some View {
-        HStack(spacing: 0) {
+        
+        VStack(alignment: .leading, spacing: 0) {
             ZStack {
                 Color.white
                 
@@ -19,16 +19,16 @@ struct RecipeSearchResult: View {
                     switch phase {
                     case .empty:
                         ProgressView()
-                            .frame(width: 180, height: 160)
+                            .frame(width: 200, height: 160)
                     case .success(let image):
                         image
                             .resizable()
                             .scaledToFill()
-                            .frame(width: 180, height: 160)
+                            .frame(width: 200, height: 160)
                             .clipped()
                     case .failure:
                         Color.gray
-                            .frame(width: 180, height: 160)
+                            .frame(width: 200, height: 160)
                     @unknown default:
                         EmptyView()
                     }
@@ -62,24 +62,12 @@ struct RecipeSearchResult: View {
         .background(Color.white)
         .cornerRadius(15)
         .shadow(radius: 5)
-        .frame(width: 360)
+        .frame(width: 200)
     }
 }
 
-struct RecipeSearchResult_Previews: PreviewProvider {
+struct PortfolioCard_Previews: PreviewProvider {
     static var previews: some View {
-        RecipeSearchResult(recipe: Recipe(
-            id: 12345,
-            title: "Spaghetti Carbonara",
-            image: "https://img.spoonacular.com/recipes/12345-312x231.jpg",
-            readyInMinutes: 25,
-            preparationMinutes: 10,
-            cookingMinutes: 15,
-            extendedIngredients: [],
-            analyzedInstructions: [],
-            summary: "A classic Italian pasta dish with eggs, cheese, pancetta, and pepper.",
-            spoonacularScore: 87.5
-        ))
-
+        PortfolioCard(recipe: RecipeCardModel(id: 12345, title: "Pasta", image: "https://img.spoonacular.com/recipes/12345-312x231.jpg", readyInMinutes: 10, spoonacularScore: 86))
     }
 }
