@@ -4,6 +4,7 @@ struct RecipeInfoView: View {
     let recipeId: Int
     @State private var recipeDetail: Recipe? = nil
     @State private var isFavorite = false
+    @State private var checkedSteps: Set<Int> = []
     
     var body: some View {
         ScrollView {
@@ -75,6 +76,21 @@ struct RecipeInfoView: View {
                         Text("• \(fraction) \(ingredient.unit) \(ingredient.name)")
                     }
                     
+                    if !checkedSteps.isEmpty {
+                        VStack(alignment: .leading, spacing: 5) {
+                            Text("Completed Steps: \(checkedSteps.count)/\(recipeDetail?.analyzedInstructions.first?.steps.count ?? 0)")
+                                .font(.headline)
+                                .foregroundColor(.black)
+                                .padding(.top, 20)
+
+                            ProgressView(value: Double(checkedSteps.count), total: Double(recipeDetail?.analyzedInstructions.first?.steps.count ?? 1))
+                                .progressViewStyle(LinearProgressViewStyle(tint: .orange))
+                                .frame(height: 8)
+                                .clipShape(Capsule())
+                        }
+                        .padding(.bottom, 5)
+                    }
+                    
                     // Instructions
                     Text("Instructions")
                         .font(.title2)
@@ -83,7 +99,22 @@ struct RecipeInfoView: View {
                     if let instructions = recipeDetail?.analyzedInstructions {
                         ForEach(instructions, id: \.name) { instruction in
                             ForEach(instruction.steps, id: \.number) { step in
-                                Text("**\(step.number).** \(step.step)")
+                                HStack {
+                                    Button(action: {
+                                        if checkedSteps.contains(step.number) {
+                                            checkedSteps.remove(step.number)
+                                        } else {
+                                            checkedSteps.insert(step.number)
+                                        }
+                                    }) {
+                                        Image(systemName: checkedSteps.contains(step.number) ? "checkmark.square.fill" : "square")
+                                            .foregroundColor(.blue)
+                                    }
+                                    Text("**\(step.number).** \(step.step)")
+                                        .strikethrough(checkedSteps.contains(step.number))
+                                        .foregroundColor(checkedSteps.contains(step.number) ? .gray : .primary)
+                                        .animation(.easeInOut, value: checkedSteps)
+                                }
                             }
                         }
                     }

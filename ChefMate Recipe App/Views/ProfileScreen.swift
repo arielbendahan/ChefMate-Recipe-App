@@ -12,14 +12,24 @@ struct ProfileScreen: View {
     @AppStorage("isLoggedIn") private var isLoggedIn = true
     var body: some View {
             VStack {
-                HStack {
-                    Text("Profile")
-                        .font(.title)
-                        .bold()
-                        .foregroundStyle(.orange)
-                        .padding()
-                    Spacer()
+                ZStack {
+                    Rectangle()
+                        .fill(Color.white)
+                        .frame(height: 125)
+                        .shadow(color: .gray.opacity(0.5), radius: 5, x: 0, y: 3)
+                    
+                    HStack {
+                        Text("Profile")
+                            .font(.title)
+                            .bold()
+                            .foregroundColor(.orange)
+                            .padding(.leading)
+                            .padding(.top, 50)
+                        Spacer()
+                    }
                 }
+                .frame(maxWidth: .infinity)
+                .ignoresSafeArea()
                 Button {
                     authManager.logout { success in
                         if success {
