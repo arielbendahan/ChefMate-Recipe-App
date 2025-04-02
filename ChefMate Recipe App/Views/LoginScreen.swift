@@ -106,7 +106,7 @@ struct LoginScreen: View {
         }
         
         
-        let user = UserModel(id: "", email: email, password: password)
+        let user = UserModel(id: "", email: email, firstName: "", lastName: "" ,password: password)
         
         authManager.login(user: user) { success in
             if success {

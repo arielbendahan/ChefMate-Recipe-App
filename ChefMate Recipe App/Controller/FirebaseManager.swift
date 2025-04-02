@@ -57,12 +57,12 @@ class AuthManager : ObservableObject {
                         self.errorMessage = error.localizedDescription
                     }
                     completion(false)
-                } else if let user = result?.user {
-                    self.user = user
+                } else if let firebaseUser = result?.user {
+                    self.user = firebaseUser
                     self.isAuthenticated = true
                     
                     // Create a new user document in Firestore with an empty favourites array
-                    let newUser = UserModel(id: user.uid, email: user.email ?? "", password: "")
+                    let newUser = UserModel(id: firebaseUser.uid, email: user.email , firstName: user.firstName , lastName: user.lastName ,password: "")
                     self.saveUserDataToFirebase(user: newUser) { success in
                         if success {
                             print("Register successful and user saved in Firestore")
@@ -94,6 +94,8 @@ class AuthManager : ObservableObject {
     func saveUserDataToFirebase(user: UserModel, completion: @escaping (Bool) -> Void) {
         db.collection("users").document(user.id).setData([
             "email": user.email,
+            "firstName": user.firstName,
+            "lastName": user.lastName,
             "favouriteRecipes": []
         ]) { error in
             DispatchQueue.main.async {

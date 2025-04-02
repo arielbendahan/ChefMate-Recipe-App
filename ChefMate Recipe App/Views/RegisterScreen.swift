@@ -11,6 +11,8 @@ struct RegisterScreen: View {
     @StateObject private var authManager = AuthManager()
     @State private var email = ""
     @State private var password = ""
+    @State private var firstName = ""
+    @State private var lastName = ""
     @State private var showAlert = false
     @State private var errorMsg = ""
     @State private var isRegistered = false
@@ -32,7 +34,25 @@ struct RegisterScreen: View {
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .cornerRadius(10)
                     .background(Color.white)
-                    .padding(.horizontal)
+                    .padding()
+                    .shadow(color: .gray.opacity(0.3), radius: 5)
+                    .textInputAutocapitalization(.none)
+                    .autocorrectionDisabled()
+                
+                TextField("First Name", text: $firstName)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .cornerRadius(10)
+                    .background(Color.white)
+                    .padding()
+                    .shadow(color: .gray.opacity(0.3), radius: 5)
+                    .textInputAutocapitalization(.none)
+                    .autocorrectionDisabled()
+                
+                TextField("Last Name", text: $lastName)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .cornerRadius(10)
+                    .background(Color.white)
+                    .padding()
                     .shadow(color: .gray.opacity(0.3), radius: 5)
                     .textInputAutocapitalization(.none)
                     .autocorrectionDisabled()
@@ -78,7 +98,7 @@ struct RegisterScreen: View {
             return
         }
         
-        let user = UserModel(id: "",email: email, password: password)
+        let user = UserModel(id: "",email: email, firstName: firstName, lastName: lastName ,password: password)
         authManager.register(user: user) { success in
                 if success {
                     isLoggedIn = true
