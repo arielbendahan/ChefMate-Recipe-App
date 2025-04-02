@@ -76,20 +76,23 @@ struct RecipeInfoView: View {
                         Text("• \(fraction) \(ingredient.unit) \(ingredient.name)")
                     }
                     
-                    if !checkedSteps.isEmpty {
+                    if let totalSteps = recipeDetail?.analyzedInstructions.first?.steps.count, totalSteps > 0, !checkedSteps.isEmpty {
+                        let isCompleted = checkedSteps.count == totalSteps
+                        
                         VStack(alignment: .leading, spacing: 5) {
-                            Text("Completed Steps: \(checkedSteps.count)/\(recipeDetail?.analyzedInstructions.first?.steps.count ?? 0)")
+                            Text(isCompleted ? "Recipe Completed!" : "Completed Steps: \(checkedSteps.count)/\(totalSteps)")
                                 .font(.headline)
                                 .foregroundColor(.black)
                                 .padding(.top, 20)
 
-                            ProgressView(value: Double(checkedSteps.count), total: Double(recipeDetail?.analyzedInstructions.first?.steps.count ?? 1))
-                                .progressViewStyle(LinearProgressViewStyle(tint: .orange))
+                            ProgressView(value: Double(checkedSteps.count), total: Double(totalSteps))
+                                .progressViewStyle(LinearProgressViewStyle(tint: isCompleted ? .green : .orange))
                                 .frame(height: 8)
                                 .clipShape(Capsule())
                         }
                         .padding(.bottom, 5)
                     }
+
                     
                     // Instructions
                     Text("Instructions")
