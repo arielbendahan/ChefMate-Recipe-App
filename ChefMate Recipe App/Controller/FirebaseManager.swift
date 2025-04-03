@@ -14,6 +14,9 @@ class AuthManager : ObservableObject {
     @Published var user: User?
     @Published var errorMessage: String?
     @Published var isAuthenticated = false
+    @Published var firstName: String = ""
+    @Published var lastName: String = ""
+    @Published var favoriteCount: Int = 0
     private let db = Firestore.firestore()
     
     init(){
@@ -179,6 +182,29 @@ class AuthManager : ObservableObject {
             }
         }
     }
+    
+    func fetchUserProfile() {
+            guard let userId = user?.uid else { return }
+            
+            let userRef = db.collection("users").document(userId)
+            
+            userRef.getDocument { document, error in
+                DispatchQueue.main.async {
+                    if let error = error {
+                        print("Error fetching user profile: \(error.localizedDescription)")
+                        return
+                    }
+                    
+                    if let document = document, document.exists {
+                        let data = document.data()
+                        self.firstName = data?["firstName"] as? String ?? "Unknown"
+                        self.lastName = data?["lastName"] as? String ?? "User"
+                        let favorites = data?["favouriteRecipes"] as? [Int] ?? []
+                        self.favoriteCount = favorites.count
+                    }
+                }
+            }
+        }
 
 
 
