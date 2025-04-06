@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct HomeView: View {
+    @StateObject private var recipesViewModel = HomeViewRecipesModel()
     var body: some View {
             ScrollView {
                 VStack {
@@ -30,7 +31,7 @@ struct HomeView: View {
                     }
                     .frame(maxWidth: .infinity)
                     
-                    // Featured Recipes Title
+                    // Featured Recipes
                     HStack {
                         Text("Featured Recipes")
                             .font(.title2)
@@ -39,14 +40,14 @@ struct HomeView: View {
                             .padding(.top)
                         Spacer()
                     }
-                    RecipeScrollView()
+                    RecipeScrollView(recipes: recipesViewModel.featuredRecipes)
                         .frame(minHeight: 200)
                     
                     Divider()
                         .frame(width: 300)
                         .padding()
                     
-                    // Trending Recipes Title
+                    // Trending Recipes
                     HStack {
                         Text("Trending Recipes")
                             .font(.title2)
@@ -54,12 +55,13 @@ struct HomeView: View {
                             .padding(.leading)
                         Spacer()
                     }
-                     //RecipeScrollView()
+//                    RecipeScrollView(recipes: recipesViewModel.trendingRecipes)
+//                        .frame(minHeight: 200)
                     Divider()
                         .frame(width: 300)
                         .padding()
                     
-                    // New Recipes Title
+                    // New Recipes
                     HStack {
                         Text("New Recipes")
                             .font(.title2)
@@ -67,11 +69,17 @@ struct HomeView: View {
                             .padding(.leading)
                         Spacer()
                     }
-                     //RecipeScrollView()
+//                    RecipeScrollView(recipes: recipesViewModel.newRecipes)
+//                        .frame(minHeight: 200)
                     
                     Spacer()
                 }
             }.ignoresSafeArea()
+            .task {
+                if recipesViewModel.featuredRecipes.isEmpty {
+                    await recipesViewModel.loadAllRecipes()
+                }
+            }
     }
 }
 
