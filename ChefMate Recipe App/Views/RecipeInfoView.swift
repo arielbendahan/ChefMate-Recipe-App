@@ -80,7 +80,7 @@ struct RecipeInfoView: View {
                         let isCompleted = checkedSteps.count == totalSteps
                         
                         VStack(alignment: .leading, spacing: 5) {
-                            Text(isCompleted ? "Recipe Completed!" : "Completed Steps: \(checkedSteps.count)/\(totalSteps)")
+                            Text(isCompleted ? "Recipe Completed! 🎉" : "Completed Steps: \(checkedSteps.count)/\(totalSteps)")
                                 .font(.headline)
                                 .foregroundColor(.black)
                                 .padding(.top, 20)

@@ -260,7 +260,7 @@ struct ExploreScreen: View {
                         }
                     }
                 }
-            }
+            }.padding(.bottom, 25)
         }
         
     }

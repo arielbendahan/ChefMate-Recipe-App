@@ -12,9 +12,9 @@ class ApiManager {
     // API Key 1
     //private let apiKey = "7042b5e9c0ae40258bbb050bf01a6000"
     // API Key 2
-    //private let apiKey = "2472e0b98f1e476a813d92f8a13c4d76"
+    private let apiKey = "2472e0b98f1e476a813d92f8a13c4d76"
     // API Key 3
-    private let apiKey = "4e39f855e5be484d9b42ff63ab8bfa8a"
+    //private let apiKey = "4e39f855e5be484d9b42ff63ab8bfa8a"
     private let baseURL = "https://api.spoonacular.com/"
  
     private init() {}

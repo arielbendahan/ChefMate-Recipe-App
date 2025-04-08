@@ -56,7 +56,7 @@ struct PortfolioScreen: View {
                         }
                     }
                     .padding()
-                }
+                }.padding(.bottom, 25)
             }
         }
         .onAppear {
