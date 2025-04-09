@@ -10,14 +10,12 @@ import SwiftUI
 struct HomeView: View {
     @StateObject private var recipesViewModel = HomeViewRecipesModel()
     var body: some View {
-            ScrollView {
                 VStack {
                     ZStack {
                         Rectangle()
                             .fill(Color.white)
                             .frame(height: 125)
                             .shadow(color: .gray.opacity(0.5), radius: 5, x: 0, y: 3)
-                            
                         
                         HStack {
                             Text("ChefMate")
@@ -30,7 +28,7 @@ struct HomeView: View {
                         }
                     }
                     .frame(maxWidth: .infinity)
-                    
+                    ScrollView {
                     // Featured Recipes
                     HStack {
                         Text("Featured Recipes")

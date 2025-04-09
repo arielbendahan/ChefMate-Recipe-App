@@ -30,7 +30,6 @@ struct PortfolioScreen: View {
                 }
             }
             .frame(maxWidth: .infinity)
-            .ignoresSafeArea()
             
             if isLoading {
                 ProgressView()
@@ -58,7 +57,7 @@ struct PortfolioScreen: View {
                     .padding()
                 }.padding(.bottom, 25)
             }
-        }
+        }.ignoresSafeArea(edges: .top)
         .onAppear {
             loadFavoriteRecipes()
         }

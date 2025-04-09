@@ -92,11 +92,23 @@ struct ExploreScreen: View {
     
     var body: some View {
         VStack (alignment: .leading){
-            Text("Explore")
-                .font(.title)
-                .bold()
-                .foregroundStyle(.orange)
-                .padding()
+            ZStack {
+                Rectangle()
+                    .fill(Color.white)
+                    .frame(height: 125)
+                    .shadow(color: .gray.opacity(0.5), radius: 5, x: 0, y: 3)
+                
+                HStack {
+                    Text("Explore")
+                        .font(.title)
+                        .bold()
+                        .foregroundColor(.orange)
+                        .padding(.leading)
+                        .padding(.top, 50)
+                    Spacer()
+                }
+            }
+            .frame(maxWidth: .infinity)
             
             HStack(spacing: 10){
                 
@@ -261,7 +273,7 @@ struct ExploreScreen: View {
                     }
                 }
             }.padding(.bottom, 25)
-        }
+        }.ignoresSafeArea(edges: .top)
         
     }
     
