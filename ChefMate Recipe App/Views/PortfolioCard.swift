@@ -27,8 +27,12 @@ struct PortfolioCard: View {
                             .frame(width: 200, height: 160)
                             .clipped()
                     case .failure:
-                        Color.gray
-                            .frame(width: 200, height: 160)
+                        ZStack {
+                            Color.gray
+                            Text("No Image")
+                                .foregroundColor(.white)
+                                .bold()
+                        }.frame(width: 200, height: 160)
                     @unknown default:
                         EmptyView()
                     }

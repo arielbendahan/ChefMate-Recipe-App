@@ -11,13 +11,31 @@ struct RecipeInfoView: View {
             if let recipe = recipeDetail {
                 VStack(alignment: .leading, spacing: 10) {
                     // Recipe Image
-                    AsyncImage(url: URL(string: recipe.image)) { image in
-                        image.resizable().scaledToFit()
-                    } placeholder: {
-                        ProgressView()
+                    AsyncImage(url: URL(string: recipe.image)) { phase in
+                        switch phase {
+                        case .empty:
+                            ProgressView()
+                                .frame(height: 250)
+                        case .success(let image):
+                            image
+                                .resizable()
+                                .scaledToFit()
+                                .frame(height: 250)
+                                .cornerRadius(10)
+                        case .failure:
+                            ZStack {
+                                Color.gray
+                                Text("No Image")
+                                    .foregroundColor(.white)
+                                    .bold()
+                            }
+                            .frame(height: 250)
+                            .cornerRadius(10)
+                        @unknown default:
+                            EmptyView()
+                        }
                     }
-                    .frame(height: 250)
-                    .cornerRadius(10)
+
                     
                     // Recipe Title
                     HStack {

@@ -71,24 +71,28 @@ struct PortfolioScreen: View {
             
             Task {
                 do {
-                    let recipes = try await withThrowingTaskGroup(of: Recipe.self) { group -> [Recipe] in
+                    let recipes = try await withThrowingTaskGroup(of: (Int, Recipe).self) { group -> [Int: Recipe] in
                         for id in favoriteIds {
                             group.addTask {
-                                try await ApiManager.shared.fetchRecipeDetails(for: id)
+                                let recipe = try await ApiManager.shared.fetchRecipeDetails(for: id)
+                                return (id, recipe)
                             }
                         }
                         
-                        var recipes = [Recipe]()
-                        for try await recipe in group {
-                            recipes.append(recipe)
+                        var results: [Int: Recipe] = [:]
+                        for try await (id, recipe) in group {
+                            results[id] = recipe
                         }
-                        return recipes
+                        return results
                     }
-                    
+
+                    let orderedRecipes = favoriteIds.compactMap { recipes[$0] }
+
                     DispatchQueue.main.async {
-                        self.favoriteRecipes = recipes
+                        self.favoriteRecipes = orderedRecipes
                         self.isLoading = false
                     }
+
                 } catch {
                     print("Error loading favorite recipes: \(error)")
                     DispatchQueue.main.async {
