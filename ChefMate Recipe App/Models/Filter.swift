@@ -54,8 +54,8 @@ class Filter: Identifiable, Hashable {
             builder.addCuisine(name)
         case .diet:
             builder.addDiet(name)
-        case .ingredient:
-            builder.addIngredient(name)
+        case .intolerance:
+            builder.addIntolerance(name)
         case .mealType:
             builder.addMealType(name)
         }
@@ -73,5 +73,5 @@ class Filter: Identifiable, Hashable {
 }
 
 enum FilterType {
-    case cuisine, diet, ingredient, mealType
+    case cuisine, diet, intolerance, mealType
 }

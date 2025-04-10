@@ -12,7 +12,7 @@ class RecipeSearchBuilder {
     private var cuisineList: [String] = []
     private var dietList: [String] = []
     private var mealTypeList: [String] = []
-    private var ingredientList: [String] = []
+    private var intoleranceList: [String] = []
 
     init(query: String) {
         self.query = query
@@ -30,8 +30,8 @@ class RecipeSearchBuilder {
         mealTypeList.append(mealType)
     }
 
-    func addIngredient(_ ingredient: String) {
-        ingredientList.append(ingredient)
+    func addIntolerance(_ intolerance: String) {
+        intoleranceList.append(intolerance)
     }
 
     func build() -> String {
@@ -49,8 +49,8 @@ class RecipeSearchBuilder {
             urlString += "&type=\(mealTypeList.joined(separator: ","))"
         }
 
-        if !ingredientList.isEmpty {
-            urlString += "&includeIngredients=\(ingredientList.joined(separator: ","))"
+        if !intoleranceList.isEmpty {
+            urlString += "&intolerances=\(intoleranceList.joined(separator: ","))"
         }
         
         return urlString

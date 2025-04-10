@@ -78,12 +78,27 @@ struct ExploreScreen: View {
         .init(name: "drink", type: .mealType),
     ]
     
+    var intoleranceFilters: [Filter] = [
+
+        .init(name: "dairy", type: .intolerance),
+        .init(name: "egg", type: .intolerance),
+        .init(name: "gluten", type: .intolerance),
+        .init(name: "grain", type: .intolerance),
+        .init(name: "peanut", type: .intolerance),
+        .init(name: "seafood", type: .intolerance),
+        .init(name: "sesame", type: .intolerance),
+        .init(name: "shellfish", type: .intolerance),
+        .init(name: "soy", type: .intolerance),
+        .init(name: "sulfite", type: .intolerance),
+        .init(name: "tree nut", type: .intolerance),
+        .init(name: "Wheat", type: .intolerance),
+    ]
+    
     //state booleans for the collapsable views
     @State private var isCuisineExpanded: Bool = false
     @State private var isDietExpanded: Bool = false
     @State private var isMealTypeExpanded: Bool = false
-    //work in progress
-    @State private var isIngredientsExpanded: Bool = false
+    @State private var isIntolerancesExpanded: Bool = false
     
     
     @State private var selectedFilters: Set<Filter> = []
@@ -260,6 +275,47 @@ struct ExploreScreen: View {
             }.padding()
                 .animation(.easeInOut, value: isMealTypeExpanded)
 
+            //intolerances filters
+            VStack(alignment: .leading, spacing: 10){
+                Button {
+                    withAnimation {
+                        isIntolerancesExpanded.toggle()
+                    }
+                } label: {
+                    HStack {
+                        Text("Intolerances")
+                            .font(.title3)
+                        
+                        Spacer()
+                        
+                        Image(systemName: isIntolerancesExpanded ? "chevron.up" : "chevron.down")
+                    }
+                }.buttonStyle(PlainButtonStyle())
+                
+                if isIntolerancesExpanded{
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        LazyHGrid(rows: rows, spacing: 5){
+                            ForEach(intoleranceFilters) {
+                                filter in
+                                Button {
+                                    toggleFilter(filter)
+                                    
+                                } label: {
+                                    Text(filter.name)
+                                        .padding(.horizontal)
+                                        .background(selectedFilters.contains(filter) ? .orange : .white)
+                                        .foregroundStyle(selectedFilters.contains(filter) ? .white : .orange)
+                                        .clipShape(Capsule())
+                                    
+                                }.padding(.trailing, 4)
+                            }
+                        }
+                    }.padding(.bottom)
+                        .frame(height: 100)
+                        .transition(.slide)
+                }
+            }.padding()
+                .animation(.easeInOut, value: isIntolerancesExpanded)
             
             //Spacer()
             
@@ -289,7 +345,7 @@ struct ExploreScreen: View {
         //collapse all filters
         isDietExpanded = false
         isCuisineExpanded = false
-        isIngredientsExpanded = false
+        isIntolerancesExpanded = false
         isMealTypeExpanded = false
         
         //empty current search result array
