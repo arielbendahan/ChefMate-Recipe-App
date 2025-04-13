@@ -53,8 +53,8 @@ struct HomeView: View {
                             .padding(.leading)
                         Spacer()
                     }
-//                    RecipeScrollView(recipes: recipesViewModel.trendingRecipes)
-//                        .frame(minHeight: 200)
+                    RecipeScrollView(recipes: recipesViewModel.trendingRecipes)
+                        .frame(minHeight: 200)
                     Divider()
                         .frame(width: 300)
                         .padding()
@@ -67,11 +67,12 @@ struct HomeView: View {
                             .padding(.leading)
                         Spacer()
                     }
-//                    RecipeScrollView(recipes: recipesViewModel.newRecipes)
-//                        .frame(minHeight: 200)
+                    RecipeScrollView(recipes: recipesViewModel.newRecipes)
+                        .frame(minHeight: 200)
+                        .padding(.bottom, 100)
                     
                     Spacer()
-                }
+                    }
             }.ignoresSafeArea()
             .task {
                 if recipesViewModel.featuredRecipes.isEmpty {
