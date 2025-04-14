@@ -206,6 +206,47 @@ class AuthManager : ObservableObject {
             }
         }
 
+    func updateUserName(firstName: String, lastName: String, completion: @escaping (Bool) -> Void) {
+        guard let userId = user?.uid else {
+            completion(false)
+            return
+        }
+        
+        db.collection("users").document(userId).updateData([
+            "firstName": firstName,
+            "lastName": lastName
+        ]) { error in
+            DispatchQueue.main.async {
+                if let error = error {
+                    print("Error updating name: \(error.localizedDescription)")
+                    completion(false)
+                } else {
+                    self.firstName = firstName
+                    self.lastName = lastName
+                    completion(true)
+                }
+            }
+        }
+    }
+
+    func updateUserPassword(to newPassword: String, completion: @escaping (Bool) -> Void) {
+        guard let firebaseUser = Auth.auth().currentUser else {
+            completion(false)
+            return
+        }
+        
+        firebaseUser.updatePassword(to: newPassword) { error in
+            DispatchQueue.main.async {
+                if let error = error {
+                    print("Password update failed: \(error.localizedDescription)")
+                    completion(false)
+                } else {
+                    completion(true)
+                }
+            }
+        }
+    }
+
 
 
 }

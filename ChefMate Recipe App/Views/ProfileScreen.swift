@@ -56,6 +56,17 @@ struct ProfileScreen: View {
                     .cornerRadius(10)
                     .shadow(color: .orange.opacity(0.7), radius: 5)
             }
+            NavigationLink(destination: EditProfileScreen(authManager: authManager)) {
+                Text("Edit Profile")
+                    .font(.headline)
+                    .foregroundColor(.white)
+                    .frame(width: 130)
+                    .padding()
+                    .background(Color.orange)
+                    .cornerRadius(10)
+                    .shadow(color: .orange.opacity(0.7), radius: 5)
+                    .padding(.top)
+            }
 
             Spacer()
         }
