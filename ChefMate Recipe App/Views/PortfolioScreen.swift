@@ -86,7 +86,8 @@ struct PortfolioScreen: View {
                         return results
                     }
 
-                    let orderedRecipes = favoriteIds.compactMap { recipes[$0] }
+                    let orderedRecipes = favoriteIds.compactMap { id in
+                        return recipes[id] }
 
                     DispatchQueue.main.async {
                         self.favoriteRecipes = orderedRecipes
